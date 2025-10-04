@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import VisualEditsMessenger from "../visual-edits/VisualEditsMessenger";
 import ErrorReporter from "@/components/ErrorReporter";
+import { Toaster } from "@/components/ui/sonner";
 import Script from "next/script";
 import Link from "next/link";
 
@@ -50,6 +51,7 @@ export default function RootLayout({
         </header>
 
         {children}
+        <Toaster />
         <VisualEditsMessenger />
       </body>
     </html>

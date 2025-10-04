@@ -1,17 +1,38 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import Dashboard from "@/components/Dashboard";
-import LCAWizard from "@/components/LCAWizard";
-import ScenarioBuilder from "@/components/ScenarioBuilder";
-import ReportsExport from "@/components/ReportsExport";
+import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Skeleton } from "@/components/ui/skeleton";
+import LCAResults from "@/components/LCAResults";
 
-type Section = "dashboard" | "lca" | "scenarios" | "reports";
+// Dynamic imports with loading states to fix loading issues
+const Dashboard = dynamic(() => import("@/components/Dashboard"), {
+  loading: () => <div className="space-y-4"><Skeleton className="h-[400px] w-full" /></div>,
+  ssr: false
+});
+
+const LCAWizard = dynamic(() => import("@/components/LCAWizard"), {
+  loading: () => <div className="space-y-4"><Skeleton className="h-[600px] w-full" /></div>,
+  ssr: false
+});
+
+const ScenarioBuilder = dynamic(() => import("@/components/ScenarioBuilder"), {
+  loading: () => <div className="space-y-4"><Skeleton className="h-[500px] w-full" /></div>,
+  ssr: false
+});
+
+const ReportsExport = dynamic(() => import("@/components/ReportsExport"), {
+  loading: () => <div className="space-y-4"><Skeleton className="h-[500px] w-full" /></div>,
+  ssr: false
+});
+
+type Section = "dashboard" | "lca" | "scenarios" | "reports" | "results";
 
 export default function Page() {
-  const [section, setSection] = useState<Section>("dashboard");
+  const [section, setSection] = React.useState<Section>("dashboard");
+  const [selectedAssessmentId, setSelectedAssessmentId] = useState<number | null>(null);
 
   // Generic sample KPIs and datasets (no region-specific references)
   const kpis = useMemo(
@@ -62,9 +83,9 @@ export default function Page() {
   );
   const recentProjects = useMemo(
     () => [
-      { id: "p1", name: "Bauxite Mine LCA", subtitle: "Open-cast", updatedAt: "2h ago", status: "active" },
-      { id: "p2", name: "Limestone Chain LCA", subtitle: "Cement route", updatedAt: "1d ago", status: "draft" },
-      { id: "p3", name: "Urban Metal Recycling LCA", subtitle: "Urban mining", updatedAt: "3d ago", status: "active" },
+      { id: "p1", name: "Bauxite Mine LCA", subtitle: "Open-cast", updatedAt: "2h ago", status: "active" as const },
+      { id: "p2", name: "Limestone Chain LCA", subtitle: "Cement route", updatedAt: "1d ago", status: "draft" as const },
+      { id: "p3", name: "Urban Metal Recycling LCA", subtitle: "Urban mining", updatedAt: "3d ago", status: "active" as const },
     ],
     []
   );
@@ -115,6 +136,15 @@ export default function Page() {
             <button
               className={[
                 "px-3 py-1.5 text-sm rounded-md transition-colors",
+                section === "results" ? "bg-card text-foreground" : "text-foreground/70 hover:text-foreground",
+              ].join(" ")}
+              onClick={() => setSection("results")}
+            >
+              Results
+            </button>
+            <button
+              className={[
+                "px-3 py-1.5 text-sm rounded-md transition-colors",
                 section === "scenarios" ? "bg-card text-foreground" : "text-foreground/70 hover:text-foreground",
               ].join(" ")}
               onClick={() => setSection("scenarios")}
@@ -150,6 +180,19 @@ export default function Page() {
         {section === "lca" && (
           <div className="rounded-2xl border border-border bg-card p-6">
             <LCAWizard draftKey="samvartana.lca.draft" />
+          </div>
+        )}
+
+        {section === "results" && (
+          <div className="rounded-2xl border border-border bg-card p-6">
+            {selectedAssessmentId ? (
+              <LCAResults assessmentId={selectedAssessmentId} />
+            ) : (
+              <div className="p-12 text-center">
+                <p className="text-muted-foreground mb-4">Select an assessment to view results</p>
+                <Button onClick={() => setSelectedAssessmentId(1)}>View Sample Results</Button>
+              </div>
+            )}
           </div>
         )}
 
