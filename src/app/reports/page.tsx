@@ -55,16 +55,16 @@ export default function Page() {
   return (
     <div className="min-h-dvh w-full bg-background text-foreground">
       <header className="border-b border-border/80 bg-card/75">
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-6">
+        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
           <div className="flex flex-col gap-2">
-            <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">Reports</h1>
-            <p className="text-sm text-muted-foreground">Export decision-ready outputs with traceable metadata</p>
+            <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">Reports & Export</h1>
+            <p className="text-sm text-muted-foreground">Export decision-ready outputs with traceable metadata and professional formatting</p>
           </div>
         </div>
       </header>
 
-      <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-8 space-y-8">
-        <div className="rounded-lg border bg-card p-6">
+      <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 sm:space-y-8">
+        <div className="rounded-2xl border border-border bg-card p-4 sm:p-6">
           <ReportsExport />
         </div>
 

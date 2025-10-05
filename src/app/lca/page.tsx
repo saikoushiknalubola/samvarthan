@@ -108,20 +108,15 @@ export default function LCAPage() {
     6: "Review & Submit",
   };
 
-  const handleNext = () => {
-    if (currentStep < 6) {
-      setCurrentStep((prev) => (prev + 1) as Step);
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentStep > 1) {
-      setCurrentStep((prev) => (prev - 1) as Step);
-    }
-  };
-
   const handleSaveDraft = async () => {
+    if (!projectData.projectName || !projectData.metalType) {
+      toast.error("Please fill in project name and metal type");
+      return;
+    }
+
     setSaving(true);
+    toast.loading("Saving draft...", { id: "save-draft" });
+    
     try {
       // Create or update assessment
       if (!assessmentId) {
@@ -136,7 +131,7 @@ export default function LCAPage() {
         });
         const data = await res.json();
         setAssessmentId(data.id);
-        toast.success("Draft saved successfully");
+        toast.success("Draft saved successfully!", { id: "save-draft" });
       } else {
         await fetch(`/api/assessments?id=${assessmentId}`, {
           method: "PUT",
@@ -147,10 +142,10 @@ export default function LCAPage() {
             status: "in_progress",
           }),
         });
-        toast.success("Progress saved");
+        toast.success("Progress saved!", { id: "save-draft" });
       }
     } catch (error) {
-      toast.error("Failed to save draft");
+      toast.error("Failed to save draft. Please try again.", { id: "save-draft" });
     } finally {
       setSaving(false);
     }
@@ -163,6 +158,8 @@ export default function LCAPage() {
     }
 
     setAiEstimating(true);
+    toast.loading("AI is analyzing your data...", { id: "ai-estimate" });
+    
     try {
       const res = await fetch(`/api/assessments/${assessmentId}/ai-estimate?id=${assessmentId}`, {
         method: "POST",
@@ -173,8 +170,10 @@ export default function LCAPage() {
       const estimatedFieldsSet = new Set(data.estimated_fields || []);
       setAiEstimatedFields(estimatedFieldsSet);
 
-      toast.success(`AI estimated ${data.estimated_count} parameters with ${Math.round(data.confidence_score * 100)}% confidence`, {
-        description: "Estimated values have been applied. You can still modify them manually.",
+      toast.success(`AI estimated ${data.estimated_count} parameters!`, {
+        id: "ai-estimate",
+        description: `Confidence: ${Math.round(data.confidence_score * 100)}%. You can modify estimates manually.`,
+        duration: 4000,
       });
 
       // Optionally fetch updated processing data to show estimated values
@@ -192,7 +191,7 @@ export default function LCAPage() {
         });
       }
     } catch (error) {
-      toast.error("AI estimation failed");
+      toast.error("AI estimation failed. Please try again.", { id: "ai-estimate" });
     } finally {
       setAiEstimating(false);
     }
@@ -204,7 +203,15 @@ export default function LCAPage() {
       return;
     }
 
+    // Validation
+    if (!materialData.quantityTons || !transportationData.distanceKm) {
+      toast.error("Please fill in all required fields marked with *");
+      return;
+    }
+
     setCalculating(true);
+    toast.loading("Calculating environmental impacts...", { id: "calculate" });
+    
     try {
       // Save all data sections
       await Promise.all([
@@ -214,11 +221,11 @@ export default function LCAPage() {
           body: JSON.stringify({
             assessmentId,
             oreType: materialData.oreType,
-            oreGradePct: parseFloat(materialData.oreGradePct),
-            moisturePct: parseFloat(materialData.moisturePct),
+            oreGradePct: parseFloat(materialData.oreGradePct) || 0,
+            moisturePct: parseFloat(materialData.moisturePct) || 0,
             quantityTons: parseFloat(materialData.quantityTons),
             extractionMethod: materialData.extractionMethod,
-            recycledContentPct: parseFloat(materialData.recycledContentPct),
+            recycledContentPct: parseFloat(materialData.recycledContentPct) || 0,
           }),
         }),
         fetch("/api/processing-data", {
@@ -227,11 +234,11 @@ export default function LCAPage() {
           body: JSON.stringify({
             assessmentId,
             energySource: processingData.energySource,
-            energyConsumptionKwh: parseFloat(processingData.energyConsumptionKwh),
+            energyConsumptionKwh: parseFloat(processingData.energyConsumptionKwh) || 0,
             processType: processingData.processType,
-            equipmentEfficiencyPct: parseFloat(processingData.equipmentEfficiencyPct),
-            wasteGenerationTons: parseFloat(processingData.wasteGenerationTons),
-            waterUsageM3: parseFloat(processingData.waterUsageM3),
+            equipmentEfficiencyPct: parseFloat(processingData.equipmentEfficiencyPct) || 0,
+            wasteGenerationTons: parseFloat(processingData.wasteGenerationTons) || 0,
+            waterUsageM3: parseFloat(processingData.waterUsageM3) || 0,
           }),
         }),
         fetch("/api/transportation-data", {
@@ -242,7 +249,7 @@ export default function LCAPage() {
             distanceKm: parseFloat(transportationData.distanceKm),
             mode: transportationData.mode,
             fuelType: transportationData.fuelType,
-            loadCapacityTons: parseFloat(transportationData.loadCapacityTons),
+            loadCapacityTons: parseFloat(transportationData.loadCapacityTons) || 0,
           }),
         }),
         fetch("/api/circularity-metrics", {
@@ -250,11 +257,11 @@ export default function LCAPage() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             assessmentId,
-            mciScore: parseFloat(circularityData.mciScore),
-            recyclingPotentialPct: parseFloat(circularityData.recyclingPotentialPct),
-            resourceEfficiencyScore: parseFloat(circularityData.resourceEfficiencyScore),
-            extendedProductLifeYears: parseFloat(circularityData.extendedProductLifeYears),
-            reusePotentialPct: parseFloat(circularityData.reusePotentialPct),
+            mciScore: parseFloat(circularityData.mciScore) || 0,
+            recyclingPotentialPct: parseFloat(circularityData.recyclingPotentialPct) || 0,
+            resourceEfficiencyScore: parseFloat(circularityData.resourceEfficiencyScore) || 0,
+            extendedProductLifeYears: parseFloat(circularityData.extendedProductLifeYears) || 0,
+            reusePotentialPct: parseFloat(circularityData.reusePotentialPct) || 0,
           }),
         }),
       ]);
@@ -265,23 +272,44 @@ export default function LCAPage() {
       });
       const impacts = await calcRes.json();
 
-      toast.success("Assessment completed successfully!");
+      toast.success("Assessment completed successfully!", { 
+        id: "calculate",
+        description: "Redirecting to platform dashboard...",
+        duration: 3000,
+      });
+      
       // Redirect to results or platform dashboard
-      window.location.href = `/platform`;
+      setTimeout(() => {
+        window.location.href = `/platform`;
+      }, 1500);
     } catch (error) {
-      toast.error("Failed to submit assessment");
+      toast.error("Failed to submit assessment. Please try again.", { id: "calculate" });
     } finally {
       setCalculating(false);
     }
   };
 
+  const handleNext = () => {
+    if (currentStep < 6) {
+      setCurrentStep((prev) => (prev + 1) as Step);
+      toast.success(`Step ${currentStep + 1} of 6`, { duration: 1500 });
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentStep > 1) {
+      setCurrentStep((prev) => (prev - 1) as Step);
+      toast.success(`Step ${currentStep - 1} of 6`, { duration: 1500 });
+    }
+  };
+
   return (
-    <div className="min-h-dvh w-full bg-background text-foreground py-10">
+    <div className="min-h-dvh w-full bg-background text-foreground py-6 sm:py-10">
       <div className="mx-auto max-w-4xl px-4 sm:px-6">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight flex items-center gap-2">
-            <Sparkles className="h-8 w-8 text-primary" />
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-2">
+            <Sparkles className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
             LCA Assessment Wizard
           </h1>
           <p className="text-muted-foreground mt-2">
@@ -290,7 +318,7 @@ export default function LCAPage() {
         </div>
 
         {/* Progress */}
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium">
               Step {currentStep} of 6: {stepTitles[currentStep]}
@@ -760,21 +788,23 @@ export default function LCAPage() {
         </Card>
 
         {/* Navigation */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <Button
             variant="outline"
             onClick={handlePrevious}
             disabled={currentStep === 1}
+            className="w-full sm:w-auto"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Previous
           </Button>
 
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
             <Button
               variant="outline"
               onClick={handleSaveDraft}
               disabled={saving || !projectData.projectName || !projectData.metalType}
+              className="w-full sm:w-auto"
             >
               {saving ? (
                 <>
@@ -790,12 +820,12 @@ export default function LCAPage() {
             </Button>
 
             {currentStep < 6 ? (
-              <Button onClick={handleNext}>
+              <Button onClick={handleNext} className="w-full sm:w-auto">
                 Next
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Button>
             ) : (
-              <Button onClick={handleSubmit} disabled={calculating}>
+              <Button onClick={handleSubmit} disabled={calculating} className="w-full sm:w-auto">
                 {calculating ? (
                   <>
                     <Loader2 className="h-4 w-4 mr-2 animate-spin" />

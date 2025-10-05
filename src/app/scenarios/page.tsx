@@ -51,14 +51,14 @@ export default function Page() {
   return (
     <div className="min-h-dvh w-full bg-background text-foreground">
       <header className="border-b border-border/80 bg-card/75">
-        <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 py-8">
-          <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">Scenarios</h1>
+        <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 py-6 sm:py-8">
+          <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">Scenario Builder & Comparison</h1>
           <p className="mt-2 text-sm text-muted-foreground">Build and compare circularity pathways and quantify impact deltas.</p>
         </div>
       </header>
 
-      <main className="mx-auto max-w-screen-2xl px-4 sm:px-6 py-8 space-y-8">
-        <div className="rounded-2xl border border-border bg-card p-6">
+      <main className="mx-auto max-w-screen-2xl px-4 sm:px-6 py-6 sm:py-8 space-y-6 sm:space-y-8">
+        <div className="rounded-2xl border border-border bg-card p-4 sm:p-6">
           <ScenarioBuilder />
         </div>
 

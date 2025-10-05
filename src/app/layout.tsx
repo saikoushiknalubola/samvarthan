@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/sonner";
 import Script from "next/script";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Leaf } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "SAMVARTANA - Circular Mining Intelligence Platform",
@@ -38,6 +39,9 @@ export default function RootLayout({
             <div className="flex h-16 items-center justify-between gap-6">
               <div className="flex items-center gap-8">
                 <Link href="/" className="flex items-center gap-2.5 group">
+                  <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-primary to-emerald-700 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all">
+                    <Leaf className="h-5 w-5 text-white" />
+                  </div>
                   <div className="flex flex-col">
                     <h1 className="text-lg font-bold tracking-tight">SAMVARTANA</h1>
                     <p className="text-xs text-muted-foreground">Circular Mining Intelligence</p>

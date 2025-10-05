@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 import { 
   ArrowRight, 
   Sparkles, 
@@ -15,7 +16,6 @@ import {
   Shield,
   Target,
   Brain,
-  ChevronRight,
   Layers,
   LineChart,
   Leaf,
@@ -29,35 +29,46 @@ import {
 export default function Page() {
   return (
     <div className="min-h-dvh w-full">
-      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 space-y-24">
+      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-20 sm:space-y-24">
         {/* Hero Section with Visual Impact */}
-        <section className="pt-12 pb-16">
-          <div className="text-center max-w-5xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8 animate-fade-in">
+        <section className="pt-8 sm:pt-12 pb-12 sm:pb-16">
+          <div className="text-center max-w-5xl mx-auto mb-12 sm:mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6 sm:mb-8 animate-fade-in">
               <Sparkles className="h-4 w-4 text-primary animate-pulse" />
               <span className="text-sm font-medium text-primary">First-of-its-Kind AI Platform for Mining Circularity</span>
             </div>
             
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-8 leading-tight">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6 sm:mb-8 leading-tight">
               <span className="block">Transform Mining with</span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-emerald-600 to-teal-600 mt-3">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-emerald-600 to-teal-600 mt-2 sm:mt-3">
                 AI-Powered Circularity
               </span>
             </h2>
             
-            <p className="text-xl sm:text-2xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
+            <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4">
               Comprehensive Life Cycle Assessment and circular mining intelligence. 
               Accelerate sustainable mineral processing with AI-driven insights.
             </p>
             
-            <div className="flex flex-wrap justify-center gap-4 mb-16">
-              <Button asChild size="lg" className="shadow-lg hover:shadow-xl transition-all gap-2 text-base h-12 px-8">
+            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 px-4">
+              <Button 
+                asChild 
+                size="lg" 
+                className="shadow-lg hover:shadow-xl transition-all gap-2 text-base h-12 px-8 w-full sm:w-auto"
+                onClick={() => toast.success("Starting LCA Assessment...")}
+              >
                 <Link href="/lca">
                   <Sparkles className="h-5 w-5" />
                   Start LCA Assessment
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="shadow-md hover:shadow-lg transition-all gap-2 text-base border-2 h-12 px-8">
+              <Button 
+                asChild 
+                size="lg" 
+                variant="outline" 
+                className="shadow-md hover:shadow-lg transition-all gap-2 text-base border-2 h-12 px-8 w-full sm:w-auto"
+                onClick={() => toast.success("Opening Platform Dashboard...")}
+              >
                 <Link href="/platform">
                   <BarChart3 className="h-5 w-5" />
                   Open Platform
@@ -67,9 +78,9 @@ export default function Page() {
             </div>
 
             {/* Live Metrics Dashboard */}
-            <div className="rounded-3xl bg-gradient-to-br from-card to-accent/10 border border-border shadow-2xl p-8">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold flex items-center gap-2">
+            <div className="rounded-2xl sm:rounded-3xl bg-gradient-to-br from-card to-accent/10 border border-border shadow-2xl p-6 sm:p-8">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+                <h3 className="text-base sm:text-lg font-semibold flex items-center gap-2">
                   <Database className="h-5 w-5 text-primary" />
                   Live Platform Metrics
                 </h3>
@@ -79,49 +90,49 @@ export default function Page() {
                 </div>
               </div>
               
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                <div className="group rounded-2xl border border-border bg-card p-6 hover:shadow-xl hover:border-emerald-200 transition-all duration-300">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-emerald-100 to-emerald-50 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <TrendingDown className="h-6 w-6 text-emerald-600" />
+              <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="group rounded-xl sm:rounded-2xl border border-border bg-card p-4 sm:p-6 hover:shadow-xl hover:border-emerald-200 transition-all duration-300">
+                  <div className="flex items-center justify-between mb-3 sm:mb-4">
+                    <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-br from-emerald-100 to-emerald-50 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <TrendingDown className="h-5 w-5 sm:h-6 sm:w-6 text-emerald-600" />
                     </div>
                     <div className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">-3.1%</div>
                   </div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">CO₂ Emissions</p>
-                  <p className="text-3xl font-bold">9,420<span className="text-lg font-normal text-muted-foreground ml-1">tCO₂e</span></p>
+                  <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-1">CO₂ Emissions</p>
+                  <p className="text-2xl sm:text-3xl font-bold">9,420<span className="text-base sm:text-lg font-normal text-muted-foreground ml-1">tCO₂e</span></p>
                 </div>
 
-                <div className="group rounded-2xl border border-border bg-card p-6 hover:shadow-xl hover:border-amber-200 transition-all duration-300">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-amber-100 to-amber-50 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Zap className="h-6 w-6 text-amber-600" />
+                <div className="group rounded-xl sm:rounded-2xl border border-border bg-card p-4 sm:p-6 hover:shadow-xl hover:border-amber-200 transition-all duration-300">
+                  <div className="flex items-center justify-between mb-3 sm:mb-4">
+                    <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-br from-amber-100 to-amber-50 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Zap className="h-5 w-5 sm:h-6 sm:w-6 text-amber-600" />
                     </div>
                     <div className="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200">+1.2%</div>
                   </div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">Energy Efficiency</p>
-                  <p className="text-3xl font-bold">2.74M<span className="text-lg font-normal text-muted-foreground ml-1">kWh</span></p>
+                  <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-1">Energy Efficiency</p>
+                  <p className="text-2xl sm:text-3xl font-bold">2.74M<span className="text-base sm:text-lg font-normal text-muted-foreground ml-1">kWh</span></p>
                 </div>
 
-                <div className="group rounded-2xl border border-border bg-card p-6 hover:shadow-xl hover:border-sky-200 transition-all duration-300">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-sky-100 to-sky-50 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Recycle className="h-6 w-6 text-sky-600" />
+                <div className="group rounded-xl sm:rounded-2xl border border-border bg-card p-4 sm:p-6 hover:shadow-xl hover:border-sky-200 transition-all duration-300">
+                  <div className="flex items-center justify-between mb-3 sm:mb-4">
+                    <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-br from-sky-100 to-sky-50 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Recycle className="h-5 w-5 sm:h-6 sm:w-6 text-sky-600" />
                     </div>
                     <div className="text-xs font-semibold px-2.5 py-1 rounded-full bg-sky-50 text-sky-700 border border-sky-200">-0.9%</div>
                   </div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">Water Usage</p>
-                  <p className="text-3xl font-bold">760k<span className="text-lg font-normal text-muted-foreground ml-1">m³</span></p>
+                  <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-1">Water Usage</p>
+                  <p className="text-2xl sm:text-3xl font-bold">760k<span className="text-base sm:text-lg font-normal text-muted-foreground ml-1">m³</span></p>
                 </div>
 
-                <div className="group rounded-2xl border border-border bg-card p-6 hover:shadow-xl hover:border-purple-200 transition-all duration-300">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <TrendingUp className="h-6 w-6 text-purple-600" />
+                <div className="group rounded-xl sm:rounded-2xl border border-border bg-card p-4 sm:p-6 hover:shadow-xl hover:border-purple-200 transition-all duration-300">
+                  <div className="flex items-center justify-between mb-3 sm:mb-4">
+                    <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <TrendingUp className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
                     </div>
                     <div className="text-xs font-semibold px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200">+0.6%</div>
                   </div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">Waste Recovered</p>
-                  <p className="text-3xl font-bold">5,100<span className="text-lg font-normal text-muted-foreground ml-1">t</span></p>
+                  <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-1">Waste Recovered</p>
+                  <p className="text-2xl sm:text-3xl font-bold">5,100<span className="text-base sm:text-lg font-normal text-muted-foreground ml-1">t</span></p>
                 </div>
               </div>
             </div>
@@ -129,55 +140,55 @@ export default function Page() {
         </section>
 
         {/* What is SAMVARTANA - Enhanced Visual Section */}
-        <section className="rounded-3xl bg-gradient-to-br from-card via-card to-accent/5 border border-border shadow-2xl p-10 sm:p-14 relative overflow-hidden">
+        <section className="rounded-2xl sm:rounded-3xl bg-gradient-to-br from-card via-card to-accent/5 border border-border shadow-2xl p-6 sm:p-10 lg:p-14 relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(15,118,110,0.05),transparent)]" />
           <div className="relative z-10 max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20 mb-6">
+            <div className="text-center mb-8 sm:mb-12">
+              <div className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-primary/10 border border-primary/20 mb-4 sm:mb-6">
                 <Globe className="h-4 w-4 text-primary" />
                 <span className="text-sm font-semibold text-primary">About SAMVARTANA</span>
               </div>
-              <h3 className="text-4xl sm:text-5xl font-bold mb-5">What is SAMVARTANA?</h3>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-5">What is SAMVARTANA?</h3>
+              <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
                 Sanskrit for <span className="font-semibold text-foreground">"completion of a cycle"</span> — representing the full circular transformation of materials in mining
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8 mb-10">
-              <div className="space-y-6">
-                <div className="group flex gap-5 p-5 rounded-2xl hover:bg-accent/30 transition-all duration-300">
-                  <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-primary to-emerald-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
-                    <Brain className="h-7 w-7 text-white" />
+            <div className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-10">
+              <div className="space-y-4 sm:space-y-6">
+                <div className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300">
+                  <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-gradient-to-br from-primary to-emerald-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
+                    <Brain className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
                   </div>
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">AI-Powered Intelligence</h4>
-                    <p className="text-muted-foreground leading-relaxed">
+                  <div className="min-w-0">
+                    <h4 className="font-bold text-base sm:text-lg mb-2">AI-Powered Intelligence</h4>
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                       Advanced ML models estimate missing LCA parameters using industry benchmarks, 
                       ensuring comprehensive assessments with incomplete data.
                     </p>
                   </div>
                 </div>
 
-                <div className="group flex gap-5 p-5 rounded-2xl hover:bg-accent/30 transition-all duration-300">
-                  <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
-                    <Workflow className="h-7 w-7 text-white" />
+                <div className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300">
+                  <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
+                    <Workflow className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
                   </div>
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">End-to-End LCA</h4>
-                    <p className="text-muted-foreground leading-relaxed">
+                  <div className="min-w-0">
+                    <h4 className="font-bold text-base sm:text-lg mb-2">End-to-End LCA</h4>
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                       Track environmental impact from extraction through processing, use phase, 
                       and end-of-life for Aluminium, Copper, and Steel.
                     </p>
                   </div>
                 </div>
 
-                <div className="group flex gap-5 p-5 rounded-2xl hover:bg-accent/30 transition-all duration-300">
-                  <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-sky-500 to-sky-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
-                    <Recycle className="h-7 w-7 text-white" />
+                <div className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300">
+                  <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-gradient-to-br from-sky-500 to-sky-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
+                    <Recycle className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
                   </div>
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">Circularity First</h4>
-                    <p className="text-muted-foreground leading-relaxed">
+                  <div className="min-w-0">
+                    <h4 className="font-bold text-base sm:text-lg mb-2">Circularity First</h4>
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                       Calculate Material Circularity Index (MCI), recycling potential, and resource efficiency 
                       to quantify circular economy performance.
                     </p>
@@ -185,40 +196,40 @@ export default function Page() {
                 </div>
               </div>
 
-              <div className="space-y-6">
-                <div className="group flex gap-5 p-5 rounded-2xl hover:bg-accent/30 transition-all duration-300">
-                  <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
-                    <LineChart className="h-7 w-7 text-white" />
+              <div className="space-y-4 sm:space-y-6">
+                <div className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300">
+                  <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
+                    <LineChart className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
                   </div>
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">Visual Analytics</h4>
-                    <p className="text-muted-foreground leading-relaxed">
+                  <div className="min-w-0">
+                    <h4 className="font-bold text-base sm:text-lg mb-2">Visual Analytics</h4>
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                       Interactive material flow diagrams, KPI dashboards, and scenario comparisons 
                       make complex data accessible to stakeholders.
                     </p>
                   </div>
                 </div>
 
-                <div className="group flex gap-5 p-5 rounded-2xl hover:bg-accent/30 transition-all duration-300">
-                  <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
-                    <Target className="h-7 w-7 text-white" />
+                <div className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300">
+                  <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
+                    <Target className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
                   </div>
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">Scenario Comparison</h4>
-                    <p className="text-muted-foreground leading-relaxed">
+                  <div className="min-w-0">
+                    <h4 className="font-bold text-base sm:text-lg mb-2">Scenario Comparison</h4>
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                       Compare linear vs circular pathways with feasibility scores, cost analysis, 
                       and implementation roadmaps for planning.
                     </p>
                   </div>
                 </div>
 
-                <div className="group flex gap-5 p-5 rounded-2xl hover:bg-accent/30 transition-all duration-300">
-                  <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
-                    <Factory className="h-7 w-7 text-white" />
+                <div className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300">
+                  <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
+                    <Factory className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
                   </div>
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">Industry-Specific</h4>
-                    <p className="text-muted-foreground leading-relaxed">
+                  <div className="min-w-0">
+                    <h4 className="font-bold text-base sm:text-lg mb-2">Industry-Specific</h4>
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                       Region-adaptable emission factors, processing parameters, and benchmarks 
                       tailored to mining industry requirements.
                     </p>
@@ -227,12 +238,12 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="rounded-2xl bg-gradient-to-br from-primary/10 to-emerald-50/50 border-2 border-primary/30 p-8 text-center shadow-lg">
-              <p className="text-xl font-semibold mb-3 flex items-center justify-center gap-2">
-                <Shield className="h-6 w-6 text-primary" />
+            <div className="rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/10 to-emerald-50/50 border-2 border-primary/30 p-6 sm:p-8 text-center shadow-lg">
+              <p className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 flex flex-col sm:flex-row items-center justify-center gap-2">
+                <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                 Built for India's Ministry of Mines
               </p>
-              <p className="text-muted-foreground text-lg leading-relaxed max-w-3xl mx-auto">
+              <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-3xl mx-auto">
                 Designed to accelerate India's transition to a circular minerals economy with 
                 transparent, traceable, and actionable environmental intelligence.
               </p>
@@ -242,18 +253,18 @@ export default function Page() {
 
         {/* Core Features - Problem Statement Alignment */}
         <section>
-          <div className="text-center mb-14">
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20 mb-6">
+          <div className="text-center mb-10 sm:mb-14">
+            <div className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-primary/10 border border-primary/20 mb-4 sm:mb-6">
               <Layers className="h-4 w-4 text-primary" />
               <span className="text-sm font-semibold text-primary">Platform Capabilities</span>
             </div>
-            <h3 className="text-4xl sm:text-5xl font-bold mb-5">Complete LCA Solution</h3>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-5">Complete LCA Solution</h3>
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
               End-to-end features covering every aspect of the circular mining economy problem statement
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             <div className="group rounded-2xl border-2 border-border bg-card p-7 hover:shadow-2xl hover:border-primary/40 transition-all duration-300 hover:-translate-y-1">
               <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-primary to-emerald-700 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg">
                 <FileText className="h-7 w-7 text-white" />
@@ -323,7 +334,7 @@ export default function Page() {
         </section>
 
         {/* CTA Section - Enhanced */}
-        <section className="rounded-3xl bg-gradient-to-br from-primary via-emerald-700 to-teal-700 text-white p-10 sm:p-16 shadow-2xl relative overflow-hidden">
+        <section className="rounded-2xl sm:rounded-3xl bg-gradient-to-br from-primary via-emerald-700 to-teal-700 text-white p-8 sm:p-12 lg:p-16 shadow-2xl relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.15),transparent)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.1),transparent)]" />
           <div className="relative z-10 text-center max-w-4xl mx-auto">
@@ -352,7 +363,7 @@ export default function Page() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border/40 bg-card/50 backdrop-blur-sm mt-24">
+      <footer className="border-t border-border/40 bg-card/50 backdrop-blur-sm mt-16 sm:mt-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">

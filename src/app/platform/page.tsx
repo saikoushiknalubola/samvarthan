@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import LCAResults from "@/components/LCAResults";
+import { toast } from "sonner";
 
 // Dynamic imports with loading states to fix loading issues
 const Dashboard = dynamic(() => import("@/components/Dashboard"), {
@@ -98,65 +99,93 @@ export default function Page() {
     []
   );
 
+  const handleSectionChange = (newSection: Section) => {
+    setSection(newSection);
+    toast.success(`Switched to ${newSection.charAt(0).toUpperCase() + newSection.slice(1)}`, {
+      duration: 2000,
+    });
+  };
+
   return (
     <div className="min-h-dvh w-full bg-background text-foreground">
-      {/* Local page tabs (header contains global nav) */}
+      {/* Local page tabs */}
       <header className="border-b border-border/80 bg-card/75">
         <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 py-5">
-          <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center justify-between gap-4">
             <div>
               <h1 className="text-xl sm:text-2xl font-semibold tracking-tight">Platform Dashboard</h1>
               <p className="text-sm text-muted-foreground">Overview of projects, impacts, and activity</p>
             </div>
-            <div className="flex items-center gap-2">
-              <Button asChild variant="secondary"><Link href="/lca">Start LCA</Link></Button>
-              <Button asChild variant="secondary"><Link href="/scenarios">Scenarios</Link></Button>
-              <Button asChild variant="secondary"><Link href="/reports">Reports</Link></Button>
+            <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+              <Button 
+                asChild 
+                variant="secondary" 
+                className="flex-1 sm:flex-none"
+                onClick={() => toast.success("Opening LCA Assessment...")}
+              >
+                <Link href="/lca">Start LCA</Link>
+              </Button>
+              <Button 
+                asChild 
+                variant="secondary" 
+                className="flex-1 sm:flex-none"
+                onClick={() => toast.success("Opening Scenarios...")}
+              >
+                <Link href="/scenarios">Scenarios</Link>
+              </Button>
+              <Button 
+                asChild 
+                variant="secondary" 
+                className="flex-1 sm:flex-none"
+                onClick={() => toast.success("Opening Reports...")}
+              >
+                <Link href="/reports">Reports</Link>
+              </Button>
             </div>
           </div>
-          <div className="mt-4 inline-flex rounded-lg border border-border bg-secondary p-1">
+          <div className="mt-4 inline-flex rounded-lg border border-border bg-secondary p-1 overflow-x-auto w-full max-w-full">
             <button
               className={[
-                "px-3 py-1.5 text-sm rounded-md transition-colors",
-                section === "dashboard" ? "bg-card text-foreground" : "text-foreground/70 hover:text-foreground",
+                "px-3 py-1.5 text-sm rounded-md transition-colors whitespace-nowrap",
+                section === "dashboard" ? "bg-card text-foreground shadow-sm" : "text-foreground/70 hover:text-foreground",
               ].join(" ")}
-              onClick={() => setSection("dashboard")}
+              onClick={() => handleSectionChange("dashboard")}
             >
               Dashboard
             </button>
             <button
               className={[
-                "px-3 py-1.5 text-sm rounded-md transition-colors",
-                section === "lca" ? "bg-card text-foreground" : "text-foreground/70 hover:text-foreground",
+                "px-3 py-1.5 text-sm rounded-md transition-colors whitespace-nowrap",
+                section === "lca" ? "bg-card text-foreground shadow-sm" : "text-foreground/70 hover:text-foreground",
               ].join(" ")}
-              onClick={() => setSection("lca")}
+              onClick={() => handleSectionChange("lca")}
             >
               LCA
             </button>
             <button
               className={[
-                "px-3 py-1.5 text-sm rounded-md transition-colors",
-                section === "results" ? "bg-card text-foreground" : "text-foreground/70 hover:text-foreground",
+                "px-3 py-1.5 text-sm rounded-md transition-colors whitespace-nowrap",
+                section === "results" ? "bg-card text-foreground shadow-sm" : "text-foreground/70 hover:text-foreground",
               ].join(" ")}
-              onClick={() => setSection("results")}
+              onClick={() => handleSectionChange("results")}
             >
               Results
             </button>
             <button
               className={[
-                "px-3 py-1.5 text-sm rounded-md transition-colors",
-                section === "scenarios" ? "bg-card text-foreground" : "text-foreground/70 hover:text-foreground",
+                "px-3 py-1.5 text-sm rounded-md transition-colors whitespace-nowrap",
+                section === "scenarios" ? "bg-card text-foreground shadow-sm" : "text-foreground/70 hover:text-foreground",
               ].join(" ")}
-              onClick={() => setSection("scenarios")}
+              onClick={() => handleSectionChange("scenarios")}
             >
               Scenarios
             </button>
             <button
               className={[
-                "px-3 py-1.5 text-sm rounded-md transition-colors",
-                section === "reports" ? "bg-card text-foreground" : "text-foreground/70 hover:text-foreground",
+                "px-3 py-1.5 text-sm rounded-md transition-colors whitespace-nowrap",
+                section === "reports" ? "bg-card text-foreground shadow-sm" : "text-foreground/70 hover:text-foreground",
               ].join(" ")}
-              onClick={() => setSection("reports")}
+              onClick={() => handleSectionChange("reports")}
             >
               Reports
             </button>
@@ -174,23 +203,44 @@ export default function Page() {
             processComparison={processComparison}
             recentProjects={recentProjects}
             projectOptions={projectOptions}
+            onQuickActionNewAssessment={() => {
+              toast.success("Redirecting to new assessment...");
+              window.location.href = "/lca";
+            }}
+            onQuickActionImportData={() => {
+              toast.success("Import data feature coming soon!");
+            }}
+            onQuickActionCreateScenario={() => {
+              toast.success("Redirecting to scenario builder...");
+              window.location.href = "/scenarios";
+            }}
+            onSearch={(query) => {
+              toast.success(`Searching for: ${query}`);
+            }}
           />
         )}
 
         {section === "lca" && (
-          <div className="rounded-2xl border border-border bg-card p-6">
+          <div className="rounded-2xl border border-border bg-card p-4 sm:p-6">
             <LCAWizard draftKey="samvartana.lca.draft" />
           </div>
         )}
 
         {section === "results" && (
-          <div className="rounded-2xl border border-border bg-card p-6">
+          <div className="rounded-2xl border border-border bg-card p-4 sm:p-6">
             {selectedAssessmentId ? (
               <LCAResults assessmentId={selectedAssessmentId} />
             ) : (
-              <div className="p-12 text-center">
+              <div className="p-8 sm:p-12 text-center">
                 <p className="text-muted-foreground mb-4">Select an assessment to view results</p>
-                <Button onClick={() => setSelectedAssessmentId(1)}>View Sample Results</Button>
+                <Button 
+                  onClick={() => {
+                    setSelectedAssessmentId(1);
+                    toast.success("Loading sample results...");
+                  }}
+                >
+                  View Sample Results
+                </Button>
               </div>
             )}
           </div>
@@ -198,7 +248,7 @@ export default function Page() {
 
         {section === "scenarios" && (
           <div className="space-y-6">
-            <div className="rounded-2xl border border-border bg-card p-6">
+            <div className="rounded-2xl border border-border bg-card p-4 sm:p-6">
               <ScenarioBuilder />
             </div>
             <Dashboard
@@ -215,7 +265,7 @@ export default function Page() {
 
         {section === "reports" && (
           <div className="space-y-6">
-            <div className="rounded-2xl border border-border bg-card p-6">
+            <div className="rounded-2xl border border-border bg-card p-4 sm:p-6">
               <ReportsExport />
             </div>
             <Dashboard
