@@ -5,6 +5,7 @@ import ErrorReporter from "@/components/ErrorReporter";
 import { Toaster } from "@/components/ui/sonner";
 import Script from "next/script";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "SAMVARTANA - Circular Mining Intelligence Platform",
@@ -31,21 +32,33 @@ export default function RootLayout({
           data-custom-data='{"appName": "YourApp", "version": "1.0.0", "greeting": "hi"}'
         />
 
-        {/* Global Header Navigation */}
-        <header className="sticky top-0 z-40 w-full border-b border-border/80 bg-card/80 backdrop-blur supports-[backdrop-filter]:bg-card/60">
-          <div className="mx-auto max-w-screen-2xl px-4 sm:px-6">
-            <div className="flex h-14 items-center justify-between gap-4">
-              <Link href="/" className="inline-flex items-center gap-2 font-semibold tracking-tight text-foreground">
-                <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground text-sm">SV</span>
-                <span>SAMVARTANA</span>
-              </Link>
-              <nav className="flex items-center gap-4 sm:gap-6 text-sm">
-                <Link href="/" className="text-foreground/80 hover:text-foreground transition-colors">Home</Link>
-                <Link href="/platform" className="text-foreground/80 hover:text-foreground transition-colors">Platform</Link>
-                <Link href="/lca" className="text-foreground/80 hover:text-foreground transition-colors">LCA</Link>
-                <Link href="/scenarios" className="text-foreground/80 hover:text-foreground transition-colors">Scenarios</Link>
-                <Link href="/reports" className="text-foreground/80 hover:text-foreground transition-colors">Reports</Link>
-              </nav>
+        {/* Single Global Header Navigation */}
+        <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-card/95 backdrop-blur-md shadow-sm">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex h-16 items-center justify-between gap-6">
+              <div className="flex items-center gap-8">
+                <Link href="/" className="flex items-center gap-2.5 group">
+                  <div className="flex flex-col">
+                    <h1 className="text-lg font-bold tracking-tight">SAMVARTANA</h1>
+                    <p className="text-xs text-muted-foreground">Circular Mining Intelligence</p>
+                  </div>
+                </Link>
+                <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+                  <Link href="/" className="text-foreground/70 hover:text-foreground transition-colors">Home</Link>
+                  <Link href="/platform" className="text-foreground/70 hover:text-foreground transition-colors">Platform</Link>
+                  <Link href="/lca" className="text-foreground/70 hover:text-foreground transition-colors">LCA</Link>
+                  <Link href="/scenarios" className="text-foreground/70 hover:text-foreground transition-colors">Scenarios</Link>
+                  <Link href="/reports" className="text-foreground/70 hover:text-foreground transition-colors">Reports</Link>
+                </nav>
+              </div>
+              <div className="flex items-center gap-3">
+                <Button asChild variant="ghost" size="sm" className="hidden sm:flex">
+                  <Link href="/lca">Start Assessment</Link>
+                </Button>
+                <Button asChild size="sm" className="shadow-md hover:shadow-lg transition-all">
+                  <Link href="/platform">Dashboard</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </header>

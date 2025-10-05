@@ -29,34 +29,6 @@ import {
 export default function Page() {
   return (
     <div className="min-h-dvh w-full">
-      {/* Streamlined Header */}
-      <header className="border-b border-border/40 bg-card/95 backdrop-blur-md sticky top-0 z-50 shadow-sm">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-primary to-emerald-700 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all">
-                <Leaf className="h-7 w-7 text-white" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold tracking-tight">SAMVARTANA</h1>
-                <p className="text-xs text-muted-foreground">Circular Mining Intelligence</p>
-              </div>
-            </Link>
-            <div className="flex items-center gap-3">
-              <Button asChild variant="ghost" size="sm" className="hidden sm:flex">
-                <Link href="/lca">Start Assessment</Link>
-              </Button>
-              <Button asChild size="sm" className="shadow-md hover:shadow-lg transition-all">
-                <Link href="/platform">
-                  Dashboard
-                  <ChevronRight className="h-4 w-4 ml-1" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
-
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 space-y-24">
         {/* Hero Section with Visual Impact */}
         <section className="pt-12 pb-16">
