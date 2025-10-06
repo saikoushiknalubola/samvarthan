@@ -20,6 +20,7 @@ import {
   Lightbulb,
   Target,
   BarChart3,
+  ChevronDown,
 } from "lucide-react";
 
 type Project = {
@@ -66,6 +67,7 @@ export default function EnhancedDashboard() {
   const [impacts, setImpacts] = useState<EnvironmentalImpact[]>([]);
   const [loading, setLoading] = useState(true);
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // Fetch projects on mount
   useEffect(() => {
@@ -267,27 +269,57 @@ export default function EnhancedDashboard() {
 
   return (
     <div className="space-y-6">
-      {/* Project Selector & Status */}
+      {/* Project Selector & Status - FIXED */}
       <Card className="border-2">
         <CardContent className="p-6">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-2">
-                <select
-                  value={selectedProject?.id || ""}
-                  onChange={(e) => {
-                    const project = projects.find(p => p.id === parseInt(e.target.value));
-                    setSelectedProject(project || null);
-                  }}
-                  className="text-2xl font-bold bg-transparent border-none outline-none cursor-pointer"
-                >
-                  {projects.map((p) => (
-                    <option key={p.id} value={p.id}>
-                      {p.projectName}
-                    </option>
-                  ))}
-                </select>
-                <Badge variant="outline" className="capitalize">
+            <div className="flex-1 w-full lg:w-auto">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-2">
+                {/* Improved Project Selector */}
+                <div className="relative w-full sm:w-auto">
+                  <button
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    className="flex items-center justify-between gap-3 px-4 py-2.5 rounded-lg border-2 border-border bg-background hover:bg-accent transition-colors w-full sm:w-auto sm:min-w-[280px]"
+                  >
+                    <span className="font-bold text-lg truncate">
+                      {selectedProject?.projectName || "Select Project"}
+                    </span>
+                    <ChevronDown className={cn(
+                      "h-5 w-5 text-muted-foreground transition-transform flex-shrink-0",
+                      isDropdownOpen && "rotate-180"
+                    )} />
+                  </button>
+                  
+                  {isDropdownOpen && (
+                    <div className="absolute top-full left-0 right-0 mt-2 bg-card border-2 border-border rounded-lg shadow-xl z-50 max-h-80 overflow-y-auto">
+                      {projects.map((project) => (
+                        <button
+                          key={project.id}
+                          onClick={() => {
+                            setSelectedProject(project);
+                            setIsDropdownOpen(false);
+                          }}
+                          className={cn(
+                            "w-full px-4 py-3 text-left hover:bg-accent transition-colors border-b border-border last:border-b-0",
+                            selectedProject?.id === project.id && "bg-primary/10 font-semibold"
+                          )}
+                        >
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="truncate">{project.projectName}</span>
+                            <Badge variant="outline" className="capitalize flex-shrink-0 text-xs">
+                              {project.metalType}
+                            </Badge>
+                          </div>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Updated: {new Date(project.updatedAt).toLocaleDateString()}
+                          </p>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                
+                <Badge variant="outline" className="capitalize flex-shrink-0">
                   {selectedProject?.metalType}
                 </Badge>
               </div>

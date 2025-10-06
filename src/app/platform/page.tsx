@@ -40,18 +40,19 @@ export default function Page() {
 
   return (
     <div className="min-h-dvh w-full bg-background">
-      {/* Header */}
-      <header className="border-b border-border bg-card/80 backdrop-blur-sm sticky top-0 z-10">
+      {/* Header - IMPROVED ALIGNMENT */}
+      <header className="border-b border-border bg-card/80 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
         <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 py-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
+            <div className="flex-1">
               <h1 className="text-2xl font-bold tracking-tight">Platform Dashboard</h1>
-              <p className="text-sm text-muted-foreground">Comprehensive lifecycle assessment and analytics</p>
+              <p className="text-sm text-muted-foreground mt-1">Comprehensive lifecycle assessment and analytics</p>
             </div>
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
               <Button 
                 asChild 
                 variant="default"
+                className="flex-1 sm:flex-none"
                 onClick={() => toast.success("Starting new assessment...")}
               >
                 <Link href="/lca">New Assessment</Link>
@@ -59,6 +60,7 @@ export default function Page() {
               <Button 
                 asChild 
                 variant="outline"
+                className="flex-1 sm:flex-none"
                 onClick={() => toast.success("Opening scenarios...")}
               >
                 <Link href="/scenarios">Scenarios</Link>
@@ -66,6 +68,7 @@ export default function Page() {
               <Button 
                 asChild 
                 variant="outline"
+                className="flex-1 sm:flex-none"
                 onClick={() => toast.success("Opening reports...")}
               >
                 <Link href="/reports">Reports</Link>
@@ -75,29 +78,30 @@ export default function Page() {
         </div>
       </header>
 
-      {/* Main Content */}
+      {/* Main Content - IMPROVED SPACING */}
       <main className="mx-auto max-w-screen-2xl px-4 sm:px-6 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5 lg:w-auto">
-            <TabsTrigger value="dashboard">Overview</TabsTrigger>
-            <TabsTrigger value="assessment">Assessment</TabsTrigger>
-            <TabsTrigger value="results">Results</TabsTrigger>
-            <TabsTrigger value="scenarios">Scenarios</TabsTrigger>
-            <TabsTrigger value="reports">Reports</TabsTrigger>
+          {/* Improved TabsList - Better mobile responsiveness */}
+          <TabsList className="grid w-full grid-cols-5 lg:w-auto lg:inline-flex h-auto">
+            <TabsTrigger value="dashboard" className="py-2.5">Overview</TabsTrigger>
+            <TabsTrigger value="assessment" className="py-2.5">Assessment</TabsTrigger>
+            <TabsTrigger value="results" className="py-2.5">Results</TabsTrigger>
+            <TabsTrigger value="scenarios" className="py-2.5">Scenarios</TabsTrigger>
+            <TabsTrigger value="reports" className="py-2.5">Reports</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="dashboard" className="space-y-6">
+          <TabsContent value="dashboard" className="space-y-6 mt-6">
             <EnhancedDashboard />
           </TabsContent>
 
-          <TabsContent value="assessment">
-            <div className="rounded-2xl border-2 border-border bg-card p-6">
+          <TabsContent value="assessment" className="mt-6">
+            <div className="rounded-2xl border-2 border-border bg-card p-4 sm:p-6">
               <LCAWizard draftKey="samvartana.lca.draft" />
             </div>
           </TabsContent>
 
-          <TabsContent value="results">
-            <div className="rounded-2xl border-2 border-border bg-card p-6">
+          <TabsContent value="results" className="mt-6">
+            <div className="rounded-2xl border-2 border-border bg-card p-4 sm:p-6">
               {selectedAssessmentId ? (
                 <LCAResults assessmentId={selectedAssessmentId} />
               ) : (
@@ -116,14 +120,14 @@ export default function Page() {
             </div>
           </TabsContent>
 
-          <TabsContent value="scenarios">
-            <div className="rounded-2xl border-2 border-border bg-card p-6">
+          <TabsContent value="scenarios" className="mt-6">
+            <div className="rounded-2xl border-2 border-border bg-card p-4 sm:p-6">
               <ScenarioBuilder />
             </div>
           </TabsContent>
 
-          <TabsContent value="reports">
-            <div className="rounded-2xl border-2 border-border bg-card p-6">
+          <TabsContent value="reports" className="mt-6">
+            <div className="rounded-2xl border-2 border-border bg-card p-4 sm:p-6">
               <ReportsExport />
             </div>
           </TabsContent>

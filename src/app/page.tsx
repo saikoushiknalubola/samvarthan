@@ -363,19 +363,38 @@ export default function Page() {
       {/* Footer */}
       <footer className="border-t border-border/40 bg-card/50 backdrop-blur-sm mt-16 sm:mt-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-primary to-emerald-700 flex items-center justify-center shadow-lg">
-                <Leaf className="h-5 w-5 text-white" />
+          <div className="flex flex-col gap-6">
+            {/* Top Row - Logo and Copyright */}
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-border/40">
+              <div className="flex items-center gap-3">
+                <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-primary to-emerald-700 flex items-center justify-center shadow-lg">
+                  <Leaf className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <span className="font-bold text-base">SAMVARTANA</span>
+                  <p className="text-xs text-muted-foreground">Circular Mining Intelligence</p>
+                </div>
               </div>
-              <div>
-                <span className="font-bold text-base">SAMVARTANA</span>
-                <p className="text-xs text-muted-foreground">Circular Mining Intelligence</p>
+              <p className="text-sm text-muted-foreground text-center">
+                © 2025 Circular Mining Intelligence Platform. Built for Ministry of Mines, India.
+              </p>
+            </div>
+            
+            {/* Bottom Row - Team Chakra */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <p className="text-sm font-semibold text-foreground">Developed by Team Chakra</p>
+              <div className="flex items-center gap-3">
+                <img 
+                  src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/team-chakra-1759712744400.jpeg"
+                  alt="Team Chakra Logo"
+                  className="h-12 w-auto object-contain rounded-lg shadow-md"
+                />
+                <div className="text-left">
+                  <p className="text-xs font-semibold text-foreground">SR University</p>
+                  <p className="text-xs text-muted-foreground">Innovation Team</p>
+                </div>
               </div>
             </div>
-            <p className="text-sm text-muted-foreground text-center">
-              © 2025 Circular Mining Intelligence Platform. Built for Ministry of Mines, India.
-            </p>
           </div>
         </div>
       </footer>
