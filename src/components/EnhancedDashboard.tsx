@@ -256,11 +256,11 @@ export default function EnhancedDashboard() {
 
   if (loading) {
     return (
-      <div className="space-y-6">
-        <Skeleton className="h-20 w-full" />
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+      <div className="space-y-4 sm:space-y-6">
+        <Skeleton className="h-16 sm:h-20 w-full" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
           {[...Array(4)].map((_, i) => (
-            <Skeleton key={i} className="h-40 w-full" />
+            <Skeleton key={i} className="h-32 sm:h-40 w-full" />
           ))}
         </div>
       </div>
@@ -268,20 +268,20 @@ export default function EnhancedDashboard() {
   }
 
   return (
-    <div className="space-y-6">
-      {/* Project Selector & Status - FIXED */}
+    <div className="space-y-4 sm:space-y-6">
+      {/* Project Selector - Mobile Perfect */}
       <Card className="border-2">
-        <CardContent className="p-6">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
-            <div className="flex-1 w-full lg:w-auto">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-2">
-                {/* Improved Project Selector */}
-                <div className="relative w-full sm:w-auto">
+        <CardContent className="p-3 sm:p-4 lg:p-6">
+          <div className="flex flex-col gap-4">
+            <div className="flex-1 w-full">
+              <div className="flex flex-col gap-3 mb-2">
+                {/* Perfect Mobile Dropdown */}
+                <div className="relative w-full">
                   <button
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    className="flex items-center justify-between gap-3 px-4 py-2.5 rounded-lg border-2 border-border bg-background hover:bg-accent transition-colors w-full sm:w-auto sm:min-w-[280px]"
+                    className="flex items-center justify-between gap-2 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border-2 border-border bg-background hover:bg-accent transition-colors w-full text-left"
                   >
-                    <span className="font-bold text-lg truncate">
+                    <span className="font-bold text-base sm:text-lg truncate">
                       {selectedProject?.projectName || "Select Project"}
                     </span>
                     <ChevronDown className={cn(
@@ -291,7 +291,7 @@ export default function EnhancedDashboard() {
                   </button>
                   
                   {isDropdownOpen && (
-                    <div className="absolute top-full left-0 right-0 mt-2 bg-card border-2 border-border rounded-lg shadow-xl z-50 max-h-80 overflow-y-auto">
+                    <div className="absolute top-full left-0 right-0 mt-2 bg-card border-2 border-border rounded-lg shadow-xl z-50 max-h-60 sm:max-h-80 overflow-y-auto">
                       {projects.map((project) => (
                         <button
                           key={project.id}
@@ -300,12 +300,12 @@ export default function EnhancedDashboard() {
                             setIsDropdownOpen(false);
                           }}
                           className={cn(
-                            "w-full px-4 py-3 text-left hover:bg-accent transition-colors border-b border-border last:border-b-0",
+                            "w-full px-3 sm:px-4 py-3 text-left hover:bg-accent transition-colors border-b border-border last:border-b-0",
                             selectedProject?.id === project.id && "bg-primary/10 font-semibold"
                           )}
                         >
                           <div className="flex items-center justify-between gap-2">
-                            <span className="truncate">{project.projectName}</span>
+                            <span className="truncate text-sm sm:text-base">{project.projectName}</span>
                             <Badge variant="outline" className="capitalize flex-shrink-0 text-xs">
                               {project.metalType}
                             </Badge>
@@ -319,30 +319,27 @@ export default function EnhancedDashboard() {
                   )}
                 </div>
                 
-                <Badge variant="outline" className="capitalize flex-shrink-0">
-                  {selectedProject?.metalType}
-                </Badge>
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <Badge variant="outline" className="capitalize text-xs sm:text-sm">
+                    {selectedProject?.metalType}
+                  </Badge>
+                  {currentImpact?.sustainabilityRating && (
+                    <Badge className={cn("text-xs sm:text-sm px-3 py-1", getRatingColor(currentImpact.sustainabilityRating))}>
+                      {currentImpact.sustainabilityRating}
+                    </Badge>
+                  )}
+                </div>
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Last updated: {selectedProject ? new Date(selectedProject.updatedAt).toLocaleDateString() : "—"}
               </p>
             </div>
-            {currentImpact?.sustainabilityRating && (
-              <div className="flex items-center gap-3">
-                <div>
-                  <p className="text-xs text-muted-foreground mb-1">Sustainability Rating</p>
-                  <Badge className={cn("text-sm px-4 py-1.5", getRatingColor(currentImpact.sustainabilityRating))}>
-                    {currentImpact.sustainabilityRating}
-                  </Badge>
-                </div>
-              </div>
-            )}
           </div>
         </CardContent>
       </Card>
 
-      {/* KPI Cards with Animation */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+      {/* KPI Cards - Mobile Perfect Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
         <AnimatePresence mode="wait">
           {kpis.map((kpi, index) => (
             <motion.div
@@ -355,16 +352,17 @@ export default function EnhancedDashboard() {
                 "border-2 hover:shadow-lg transition-all duration-300",
                 `hover:border-${kpi.color}-200`
               )}>
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between mb-4">
+                <CardContent className="p-4 sm:p-5 lg:p-6">
+                  <div className="flex items-start justify-between mb-3 sm:mb-4">
                     <div className={cn(
-                      "h-12 w-12 rounded-xl flex items-center justify-center",
+                      "h-10 w-10 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl flex items-center justify-center",
                       `bg-gradient-to-br from-${kpi.color}-100 to-${kpi.color}-50`
                     )}>
-                      <kpi.icon className={cn("h-6 w-6", `text-${kpi.color}-600`)} />
+                      <kpi.icon className={cn("h-5 w-5 sm:h-6 sm:w-6", `text-${kpi.color}-600`)} />
                     </div>
                     {kpi.trendValue && (
                       <Badge variant="outline" className={cn(
+                        "text-xs",
                         kpi.trend === "down" ? "text-emerald-600 bg-emerald-50 border-emerald-200" : 
                         "text-amber-600 bg-amber-50 border-amber-200"
                       )}>
@@ -372,13 +370,13 @@ export default function EnhancedDashboard() {
                       </Badge>
                     )}
                   </div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">{kpi.label}</p>
+                  <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-1">{kpi.label}</p>
                   <div className="flex items-baseline gap-2">
                     <motion.p
                       key={kpi.value}
                       initial={{ scale: 0.8, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      className="text-3xl font-bold"
+                      className="text-2xl sm:text-3xl font-bold"
                     >
                       {formatNumber(kpi.value)}
                     </motion.p>
@@ -391,12 +389,12 @@ export default function EnhancedDashboard() {
         </AnimatePresence>
       </div>
 
-      {/* Advanced Visualizations - NEW! */}
+      {/* Advanced Visualizations */}
       {selectedProject && (
         <AdvancedVisualizations projectId={selectedProject.id} />
       )}
 
-      {/* Benchmark Comparison */}
+      {/* Benchmark Comparison - Mobile Perfect */}
       {currentImpact?.benchmarkComparison && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -404,19 +402,20 @@ export default function EnhancedDashboard() {
           transition={{ delay: 0.4 }}
         >
           <Card className="border-2">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <BarChart3 className="h-5 w-5 text-primary" />
+            <CardHeader className="p-4 sm:p-5 lg:p-6">
+              <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                 Industry Benchmark Comparison
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <CardContent className="p-4 sm:p-5 lg:p-6 pt-0">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                 {/* CO2 Benchmark */}
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <p className="text-sm font-medium">CO₂ Emissions per Ton</p>
                     <Badge className={cn(
+                      "text-xs",
                       currentImpact.benchmarkComparison.co2Performance === "Better" ?
                       "text-emerald-600 bg-emerald-50 border-emerald-200" :
                       "text-red-600 bg-red-50 border-red-200"
@@ -425,11 +424,11 @@ export default function EnhancedDashboard() {
                     </Badge>
                   </div>
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center justify-between text-xs sm:text-sm">
                       <span className="text-muted-foreground">Your Project</span>
                       <span className="font-semibold">{currentImpact.benchmarkComparison.co2PerTon.toFixed(2)} tCO₂e</span>
                     </div>
-                    <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center justify-between text-xs sm:text-sm">
                       <span className="text-muted-foreground">Industry Avg</span>
                       <span className="font-semibold">{currentImpact.benchmarkComparison.co2Benchmark.toFixed(2)} tCO₂e</span>
                     </div>
@@ -452,8 +451,9 @@ export default function EnhancedDashboard() {
                 {/* Energy Benchmark */}
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <p className="text-sm font-medium">Energy Consumption per Ton</p>
+                    <p className="text-sm font-medium">Energy per Ton</p>
                     <Badge className={cn(
+                      "text-xs",
                       currentImpact.benchmarkComparison.energyPerformance === "Better" ?
                       "text-emerald-600 bg-emerald-50 border-emerald-200" :
                       "text-red-600 bg-red-50 border-red-200"
@@ -462,11 +462,11 @@ export default function EnhancedDashboard() {
                     </Badge>
                   </div>
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center justify-between text-xs sm:text-sm">
                       <span className="text-muted-foreground">Your Project</span>
                       <span className="font-semibold">{formatNumber(currentImpact.benchmarkComparison.energyPerTon)} kWh</span>
                     </div>
-                    <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center justify-between text-xs sm:text-sm">
                       <span className="text-muted-foreground">Industry Avg</span>
                       <span className="font-semibold">{formatNumber(currentImpact.benchmarkComparison.energyBenchmark)} kWh</span>
                     </div>
@@ -491,7 +491,7 @@ export default function EnhancedDashboard() {
         </motion.div>
       )}
 
-      {/* Recommendations */}
+      {/* Recommendations - Mobile Perfect */}
       {recommendations.length > 0 && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -499,41 +499,41 @@ export default function EnhancedDashboard() {
           transition={{ delay: 0.6 }}
         >
           <Card className="border-2 border-primary/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Lightbulb className="h-5 w-5 text-primary" />
+            <CardHeader className="p-4 sm:p-5 lg:p-6">
+              <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                <Lightbulb className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                 Intelligent Recommendations
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
+            <CardContent className="p-4 sm:p-5 lg:p-6 pt-0">
+              <div className="space-y-3 sm:space-y-4">
                 {recommendations.map((rec, index) => (
                   <motion.div
                     key={rec.id}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.7 + index * 0.1 }}
-                    className="flex gap-4 p-4 rounded-lg border-2 hover:border-primary/40 transition-colors"
+                    className="flex gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg border-2 hover:border-primary/40 transition-colors"
                   >
                     <div className={cn(
-                      "h-10 w-10 rounded-full flex items-center justify-center flex-shrink-0",
+                      "h-9 w-9 sm:h-10 sm:w-10 rounded-full flex items-center justify-center flex-shrink-0",
                       rec.impact === "high" ? "bg-red-100" : rec.impact === "medium" ? "bg-amber-100" : "bg-emerald-100"
                     )}>
                       <Target className={cn(
-                        "h-5 w-5",
+                        "h-4 w-4 sm:h-5 sm:w-5",
                         rec.impact === "high" ? "text-red-600" : rec.impact === "medium" ? "text-amber-600" : "text-emerald-600"
                       )} />
                     </div>
-                    <div className="flex-1">
-                      <div className="flex items-start justify-between gap-3 mb-2">
-                        <h4 className="font-semibold">{rec.title}</h4>
-                        <Badge className={cn("flex-shrink-0", getImpactColor(rec.impact))}>
-                          {rec.impact} impact
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-2 mb-2">
+                        <h4 className="font-semibold text-sm sm:text-base">{rec.title}</h4>
+                        <Badge className={cn("flex-shrink-0 text-xs", getImpactColor(rec.impact))}>
+                          {rec.impact}
                         </Badge>
                       </div>
-                      <p className="text-sm text-muted-foreground mb-3">{rec.description}</p>
-                      <div className="flex items-center gap-3">
-                        <Badge variant="outline" className="text-primary border-primary/30">
+                      <p className="text-xs sm:text-sm text-muted-foreground mb-3 leading-relaxed">{rec.description}</p>
+                      <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+                        <Badge variant="outline" className="text-primary border-primary/30 text-xs">
                           {rec.potentialReduction}
                         </Badge>
                         <Button size="sm" variant="ghost" className="h-7 text-xs">
@@ -552,13 +552,13 @@ export default function EnhancedDashboard() {
       {/* Empty State */}
       {!currentImpact && !loading && (
         <Card className="border-2 border-dashed">
-          <CardContent className="p-12 text-center">
-            <AlertCircle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-lg font-semibold mb-2">No Impact Data Available</h3>
-            <p className="text-muted-foreground mb-6">
+          <CardContent className="p-8 sm:p-12 text-center">
+            <AlertCircle className="h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-base sm:text-lg font-semibold mb-2">No Impact Data Available</h3>
+            <p className="text-sm sm:text-base text-muted-foreground mb-6">
               Complete an LCA assessment to view environmental impact data and recommendations.
             </p>
-            <Button asChild>
+            <Button asChild className="h-9 sm:h-10">
               <a href="/lca">Start Assessment</a>
             </Button>
           </CardContent>

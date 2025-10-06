@@ -362,7 +362,7 @@ export default function Page() {
 
       {/* Footer */}
       <footer className="border-t border-border/40 bg-card/50 backdrop-blur-sm mt-16 sm:mt-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
           <div className="flex flex-col gap-6">
             {/* Top Row - Logo and Copyright */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-border/40">
@@ -391,7 +391,7 @@ export default function Page() {
                 />
                 <div className="text-left">
                   <p className="text-xs font-semibold text-foreground">SR University</p>
-                  <p className="text-xs text-muted-foreground">Innovation Team</p>
+                  <p className="text-xs text-muted-foreground">Warangal</p>
                 </div>
               </div>
             </div>

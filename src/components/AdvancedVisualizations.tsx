@@ -140,13 +140,13 @@ export default function AdvancedVisualizations({ projectId }: { projectId: numbe
   const trend = getTrend();
 
   return (
-    <div className="space-y-6">
-      {/* Historical Trends with Animation */}
+    <div className="space-y-4 sm:space-y-6">
+      {/* Historical Trends - Mobile Perfect */}
       <Card className="border-2">
-        <CardHeader>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <CardTitle className="flex items-center gap-2">
-              <Activity className="h-5 w-5 text-primary" />
+        <CardHeader className="p-4 sm:p-5 lg:p-6">
+          <div className="flex flex-col gap-3 sm:gap-4">
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <Activity className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
               Historical Performance Trends
             </CardTitle>
             <div className="flex flex-wrap gap-2">
@@ -155,7 +155,7 @@ export default function AdvancedVisualizations({ projectId }: { projectId: numbe
                   key={m.id}
                   onClick={() => setSelectedMetric(m.id)}
                   className={cn(
-                    "px-3 py-1.5 rounded-lg text-sm font-medium transition-all",
+                    "px-2.5 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all",
                     selectedMetric === m.id
                       ? "bg-primary text-primary-foreground shadow-sm"
                       : "bg-secondary text-foreground hover:bg-accent"
@@ -167,12 +167,13 @@ export default function AdvancedVisualizations({ projectId }: { projectId: numbe
             </div>
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-4 sm:p-5 lg:p-6 pt-0">
           {trend && (
             <div className="flex items-center gap-2 mb-4">
               <Badge
                 variant="outline"
                 className={cn(
+                  "text-xs",
                   trend.direction === "down"
                     ? "text-emerald-600 bg-emerald-50 border-emerald-200"
                     : "text-amber-600 bg-amber-50 border-amber-200"
@@ -188,9 +189,9 @@ export default function AdvancedVisualizations({ projectId }: { projectId: numbe
             </div>
           )}
           
-          {/* Animated Line Chart */}
-          <div className="h-64 relative">
-            <svg className="w-full h-full" viewBox="0 0 800 240" preserveAspectRatio="xMidYMid meet">
+          {/* Animated Line Chart - Responsive */}
+          <div className="h-48 sm:h-56 lg:h-64 relative overflow-x-auto">
+            <svg className="w-full h-full min-w-[600px] sm:min-w-0" viewBox="0 0 800 240" preserveAspectRatio="xMidYMid meet">
               {/* Grid lines */}
               {[0, 1, 2, 3, 4].map((i) => (
                 <line
@@ -300,16 +301,16 @@ export default function AdvancedVisualizations({ projectId }: { projectId: numbe
         </CardContent>
       </Card>
 
-      {/* Process Breakdown */}
+      {/* Process Breakdown - Mobile Perfect */}
       <Card className="border-2">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Layers className="h-5 w-5 text-primary" />
+        <CardHeader className="p-4 sm:p-5 lg:p-6">
+          <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+            <Layers className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
             Lifecycle Stage Breakdown
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
+        <CardContent className="p-4 sm:p-5 lg:p-6 pt-0">
+          <div className="space-y-3 sm:space-y-4">
             {processData.map((p, index) => (
               <motion.div
                 key={p.process}
@@ -318,19 +319,19 @@ export default function AdvancedVisualizations({ projectId }: { projectId: numbe
                 transition={{ delay: index * 0.1 }}
                 className="space-y-2"
               >
-                <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-2">
+                <div className="flex items-center justify-between text-xs sm:text-sm gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
                     <div
-                      className="h-3 w-3 rounded-full"
+                      className="h-3 w-3 rounded-full flex-shrink-0"
                       style={{ backgroundColor: p.color }}
                     />
-                    <span className="font-medium">{p.process}</span>
+                    <span className="font-medium truncate">{p.process}</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-muted-foreground">
+                  <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+                    <span className="text-muted-foreground hidden sm:inline">
                       {p.value.toLocaleString()} tCO₂e
                     </span>
-                    <Badge variant="outline">{p.percentage}%</Badge>
+                    <Badge variant="outline" className="text-xs">{p.percentage}%</Badge>
                   </div>
                 </div>
                 <div className="relative h-3 bg-secondary rounded-full overflow-hidden">
@@ -347,25 +348,25 @@ export default function AdvancedVisualizations({ projectId }: { projectId: numbe
           </div>
 
           {/* Total */}
-          <div className="mt-6 pt-4 border-t flex items-center justify-between">
-            <span className="font-semibold">Total Impact</span>
-            <span className="text-lg font-bold">
+          <div className="mt-4 sm:mt-6 pt-4 border-t flex items-center justify-between">
+            <span className="font-semibold text-sm sm:text-base">Total Impact</span>
+            <span className="text-base sm:text-lg font-bold">
               {processData.reduce((sum, p) => sum + p.value, 0).toLocaleString()} tCO₂e
             </span>
           </div>
         </CardContent>
       </Card>
 
-      {/* Material Flow Diagram */}
+      {/* Material Flow - Mobile Perfect */}
       <Card className="border-2">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <GitBranch className="h-5 w-5 text-primary" />
+        <CardHeader className="p-4 sm:p-5 lg:p-6">
+          <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+            <GitBranch className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
             Material Flow Analysis
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
+        <CardContent className="p-4 sm:p-5 lg:p-6 pt-0">
+          <div className="space-y-2 sm:space-y-3">
             {flowData.map((flow, index) => (
               <motion.div
                 key={flow.stage}
@@ -374,26 +375,26 @@ export default function AdvancedVisualizations({ projectId }: { projectId: numbe
                 transition={{ delay: index * 0.15 }}
                 className="relative"
               >
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 sm:gap-4">
                   {/* Stage indicator */}
-                  <div className="flex-shrink-0 w-32">
-                    <p className="text-sm font-medium">{flow.stage}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {flow.loss > 0 ? `Loss: ${flow.loss.toLocaleString()} t` : "Final"}
+                  <div className="flex-shrink-0 w-20 sm:w-28 lg:w-32">
+                    <p className="text-xs sm:text-sm font-medium truncate">{flow.stage}</p>
+                    <p className="text-xs text-muted-foreground truncate">
+                      {flow.loss > 0 ? `Loss: ${flow.loss.toLocaleString()}` : "Final"}
                     </p>
                   </div>
 
                   {/* Flow bar */}
-                  <div className="flex-1 space-y-1">
-                    <div className="relative h-10 bg-secondary rounded-lg overflow-hidden">
+                  <div className="flex-1 space-y-1 min-w-0">
+                    <div className="relative h-8 sm:h-10 bg-secondary rounded-lg overflow-hidden">
                       {/* Input */}
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: "100%" }}
                         transition={{ duration: 1, delay: index * 0.15 }}
-                        className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80 flex items-center px-3"
+                        className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80 flex items-center px-2 sm:px-3"
                       >
-                        <span className="text-xs font-medium text-primary-foreground">
+                        <span className="text-xs font-medium text-primary-foreground truncate">
                           {flow.input.toLocaleString()} t
                         </span>
                       </motion.div>
@@ -406,8 +407,8 @@ export default function AdvancedVisualizations({ projectId }: { projectId: numbe
                           transition={{ duration: 0.8, delay: index * 0.15 + 0.5 }}
                           className="absolute right-0 inset-y-0 bg-red-500/30 flex items-center justify-end px-2"
                         >
-                          <span className="text-xs font-medium text-red-700">
-                            -{flow.loss.toLocaleString()} t
+                          <span className="text-xs font-medium text-red-700 truncate">
+                            -{flow.loss.toLocaleString()}
                           </span>
                         </motion.div>
                       )}
@@ -416,14 +417,14 @@ export default function AdvancedVisualizations({ projectId }: { projectId: numbe
                     {/* Efficiency indicator */}
                     {flow.loss > 0 && (
                       <p className="text-xs text-muted-foreground text-right">
-                        Efficiency: {((flow.output / flow.input) * 100).toFixed(1)}%
+                        Eff: {((flow.output / flow.input) * 100).toFixed(1)}%
                       </p>
                     )}
                   </div>
 
                   {/* Output value */}
-                  <div className="flex-shrink-0 w-24 text-right">
-                    <p className="text-sm font-semibold">{flow.output.toLocaleString()} t</p>
+                  <div className="flex-shrink-0 w-16 sm:w-20 lg:w-24 text-right">
+                    <p className="text-xs sm:text-sm font-semibold truncate">{flow.output.toLocaleString()} t</p>
                     <p className="text-xs text-muted-foreground">Output</p>
                   </div>
                 </div>
@@ -446,21 +447,21 @@ export default function AdvancedVisualizations({ projectId }: { projectId: numbe
           </div>
 
           {/* Summary */}
-          <div className="mt-6 pt-4 border-t grid grid-cols-3 gap-4 text-center">
+          <div className="mt-4 sm:mt-6 pt-4 border-t grid grid-cols-3 gap-2 sm:gap-4 text-center">
             <div>
-              <p className="text-2xl font-bold text-primary">
+              <p className="text-lg sm:text-2xl font-bold text-primary">
                 {flowData[0]?.input.toLocaleString()}
               </p>
               <p className="text-xs text-muted-foreground">Initial Input</p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-red-600">
+              <p className="text-lg sm:text-2xl font-bold text-red-600">
                 {flowData.reduce((sum, f) => sum + f.loss, 0).toLocaleString()}
               </p>
               <p className="text-xs text-muted-foreground">Total Losses</p>
             </div>
             <div>
-              <p className="text-2xl font-bold text-emerald-600">
+              <p className="text-lg sm:text-2xl font-bold text-emerald-600">
                 {flowData[flowData.length - 1]?.output.toLocaleString()}
               </p>
               <p className="text-xs text-muted-foreground">Final Output</p>
