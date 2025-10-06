@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { 
   ArrowRight, 
-  Sparkles, 
   BarChart3, 
   Recycle, 
   FileText, 
@@ -15,14 +14,13 @@ import {
   Globe,
   Shield,
   Target,
-  Brain,
+  Database,
   Layers,
   LineChart,
   Leaf,
   Factory,
   Workflow,
   TrendingUp,
-  Database,
   Download
 } from "lucide-react";
 
@@ -34,20 +32,20 @@ export default function Page() {
         <section className="pt-8 sm:pt-12 pb-12 sm:pb-16">
           <div className="text-center max-w-5xl mx-auto mb-12 sm:mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6 sm:mb-8 animate-fade-in">
-              <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-              <span className="text-sm font-medium text-primary">First-of-its-Kind AI Platform for Mining Circularity</span>
+              <Globe className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium text-primary">Professional LCA Platform for Mining Industry</span>
             </div>
             
             <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6 sm:mb-8 leading-tight">
               <span className="block">Transform Mining with</span>
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-emerald-600 to-teal-600 mt-2 sm:mt-3">
-                AI-Powered Circularity
+                Data-Driven Circularity
               </span>
             </h2>
             
             <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4">
               Comprehensive Life Cycle Assessment and circular mining intelligence. 
-              Accelerate sustainable mineral processing with AI-driven insights.
+              Accelerate sustainable mineral processing with data-driven insights.
             </p>
             
             <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 px-4">
@@ -58,7 +56,7 @@ export default function Page() {
                 onClick={() => toast.success("Starting LCA Assessment...")}
               >
                 <Link href="/lca">
-                  <Sparkles className="h-5 w-5" />
+                  <BarChart3 className="h-5 w-5" />
                   Start LCA Assessment
                 </Link>
               </Button>
@@ -158,12 +156,12 @@ export default function Page() {
               <div className="space-y-4 sm:space-y-6">
                 <div className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300">
                   <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-gradient-to-br from-primary to-emerald-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
-                    <Brain className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
+                    <Database className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="font-bold text-base sm:text-lg mb-2">AI-Powered Intelligence</h4>
+                    <h4 className="font-bold text-base sm:text-lg mb-2">Intelligent Data Analysis</h4>
                     <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                      Advanced ML models estimate missing LCA parameters using industry benchmarks, 
+                      Advanced analytics estimate missing LCA parameters using industry benchmarks, 
                       ensuring comprehensive assessments with incomplete data.
                     </p>
                   </div>
@@ -278,9 +276,9 @@ export default function Page() {
 
             <div className="group rounded-2xl border-2 border-border bg-card p-7 hover:shadow-2xl hover:border-primary/40 transition-all duration-300 hover:-translate-y-1">
               <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg">
-                <Sparkles className="h-7 w-7 text-white" />
+                <Zap className="h-7 w-7 text-white" />
               </div>
-              <h4 className="font-bold text-xl mb-3">AI Gap Filling</h4>
+              <h4 className="font-bold text-xl mb-3">Smart Gap Filling</h4>
               <p className="text-muted-foreground leading-relaxed">
                 Intelligent estimation for missing parameters using metal-specific industry benchmarks 
                 with full transparency on data sources.
@@ -346,7 +344,7 @@ export default function Page() {
             <div className="flex flex-wrap justify-center gap-5">
               <Button asChild size="lg" variant="secondary" className="shadow-2xl hover:shadow-3xl transition-all text-base h-14 px-10 font-semibold">
                 <Link href="/lca">
-                  <Sparkles className="h-5 w-5 mr-2" />
+                  <BarChart3 className="h-5 w-5 mr-2" />
                   Start LCA Assessment
                 </Link>
               </Button>
