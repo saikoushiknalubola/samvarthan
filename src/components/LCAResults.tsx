@@ -141,10 +141,10 @@ export default function LCAResults({ assessmentId, className }: LCAResultsProps)
 
   if (loading) {
     return (
-      <div className={cn("flex items-center justify-center p-12", className)}>
+      <div className={cn("flex items-center justify-center p-8 sm:p-12", className)}>
         <div className="text-center space-y-3">
           <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full mx-auto" />
-          <p className="text-sm text-muted-foreground">Loading assessment results...</p>
+          <p className="text-xs sm:text-sm text-muted-foreground">Loading assessment results...</p>
         </div>
       </div>
     );
@@ -152,31 +152,31 @@ export default function LCAResults({ assessmentId, className }: LCAResultsProps)
 
   if (!impacts) {
     return (
-      <div className={cn("p-12 text-center", className)}>
-        <AlertCircle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-        <p className="text-muted-foreground">No results available yet. Complete the assessment to view results.</p>
+      <div className={cn("p-8 sm:p-12 text-center", className)}>
+        <AlertCircle className="h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground mx-auto mb-3 sm:mb-4" />
+        <p className="text-sm sm:text-base text-muted-foreground">No results available yet. Complete the assessment to view results.</p>
       </div>
     );
   }
 
   return (
-    <div className={cn("space-y-6", className)}>
-      {/* Header */}
-      <div className="flex items-start justify-between">
-        <div>
-          <h2 className="text-2xl font-bold tracking-tight">Assessment Results</h2>
-          <p className="text-muted-foreground mt-1">
+    <div className={cn("space-y-4 sm:space-y-6", className)}>
+      {/* Header - Mobile First */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0">
+          <h2 className="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight">Assessment Results</h2>
+          <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 sm:mt-1">
             {assessment?.projectName || "LCA Assessment"} • {assessment?.metalType?.toUpperCase() || "Metal"}
           </p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm">
-            <Share2 className="h-4 w-4 mr-2" />
-            Share
+          <Button variant="outline" size="sm" className="h-8 text-xs sm:h-9 sm:text-sm">
+            <Share2 className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+            <span className="hidden sm:inline">Share</span>
           </Button>
-          <Button variant="outline" size="sm">
-            <Download className="h-4 w-4 mr-2" />
-            Export PDF
+          <Button variant="outline" size="sm" className="h-8 text-xs sm:h-9 sm:text-sm">
+            <Download className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+            <span className="hidden sm:inline">Export</span>
           </Button>
         </div>
       </div>
@@ -184,20 +184,20 @@ export default function LCAResults({ assessmentId, className }: LCAResultsProps)
       {/* Sustainability Rating Badge */}
       {impacts.sustainabilityRating && (
         <Card className={cn("border-2", getSustainabilityColor(impacts.sustainabilityRating))}>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
+          <CardContent className="p-3 sm:p-4">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-start sm:items-center gap-2 sm:gap-3 min-w-0">
                 {impacts.sustainabilityRating === "Excellent" || impacts.sustainabilityRating === "Good" ? (
-                  <CheckCircle2 className="h-6 w-6" />
+                  <CheckCircle2 className="h-5 w-5 sm:h-6 sm:w-6 shrink-0 mt-0.5 sm:mt-0" />
                 ) : (
-                  <AlertCircle className="h-6 w-6" />
+                  <AlertCircle className="h-5 w-5 sm:h-6 sm:w-6 shrink-0 mt-0.5 sm:mt-0" />
                 )}
-                <div>
-                  <p className="font-semibold">Overall Sustainability Rating</p>
-                  <p className="text-sm">Based on industry benchmarks and circularity metrics</p>
+                <div className="min-w-0">
+                  <p className="text-sm sm:text-base font-semibold">Overall Sustainability Rating</p>
+                  <p className="text-xs sm:text-sm">Based on industry benchmarks and circularity metrics</p>
                 </div>
               </div>
-              <Badge variant="outline" className="text-base px-4 py-2 font-bold">
+              <Badge variant="outline" className="text-sm sm:text-base px-3 py-1.5 sm:px-4 sm:py-2 font-bold self-start sm:self-auto">
                 {impacts.sustainabilityRating}
               </Badge>
             </div>
@@ -205,169 +205,169 @@ export default function LCAResults({ assessmentId, className }: LCAResultsProps)
         </Card>
       )}
 
-      {/* Environmental Impact KPIs */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      {/* Environmental Impact KPIs - Mobile Optimized */}
+      <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
         <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <TrendingDown className="h-4 w-4 text-emerald-600" />
-              CO₂ Emissions
+          <CardHeader className="pb-2 sm:pb-3 p-3 sm:p-4 lg:p-6">
+            <CardTitle className="text-xs sm:text-sm font-medium flex items-center gap-1.5 sm:gap-2">
+              <TrendingDown className="h-3 w-3 sm:h-4 sm:w-4 text-emerald-600" />
+              <span className="truncate">CO₂ Emissions</span>
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {formatNumber(impacts.co2EmissionsTons)} <span className="text-sm font-normal text-muted-foreground">tCO₂e</span>
+          <CardContent className="p-3 sm:p-4 lg:p-6 pt-0">
+            <div className="text-lg sm:text-xl lg:text-2xl font-bold">
+              {formatNumber(impacts.co2EmissionsTons)} <span className="text-xs sm:text-sm font-normal text-muted-foreground">tCO₂e</span>
             </div>
             {impacts.benchmarkComparison && (
               <p className={cn(
-                "text-xs mt-2 flex items-center gap-1",
+                "text-[10px] sm:text-xs mt-1 sm:mt-2 flex items-center gap-0.5 sm:gap-1",
                 impacts.benchmarkComparison.co2Performance === "Better" ? "text-emerald-600" : "text-red-600"
               )}>
                 {impacts.benchmarkComparison.co2Performance === "Better" ? (
-                  <TrendingDown className="h-3 w-3" />
+                  <TrendingDown className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
                 ) : (
-                  <TrendingUp className="h-3 w-3" />
+                  <TrendingUp className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
                 )}
-                {impacts.benchmarkComparison.co2Performance} than industry average
+                <span className="truncate">{impacts.benchmarkComparison.co2Performance} than avg</span>
               </p>
             )}
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <Zap className="h-4 w-4 text-amber-600" />
-              Energy Consumption
+          <CardHeader className="pb-2 sm:pb-3 p-3 sm:p-4 lg:p-6">
+            <CardTitle className="text-xs sm:text-sm font-medium flex items-center gap-1.5 sm:gap-2">
+              <Zap className="h-3 w-3 sm:h-4 sm:w-4 text-amber-600" />
+              <span className="truncate">Energy</span>
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {formatNumber(impacts.totalEnergyKwh)} <span className="text-sm font-normal text-muted-foreground">kWh</span>
+          <CardContent className="p-3 sm:p-4 lg:p-6 pt-0">
+            <div className="text-lg sm:text-xl lg:text-2xl font-bold">
+              {formatNumber(impacts.totalEnergyKwh)} <span className="text-xs sm:text-sm font-normal text-muted-foreground">kWh</span>
             </div>
             {impacts.benchmarkComparison && (
               <p className={cn(
-                "text-xs mt-2 flex items-center gap-1",
+                "text-[10px] sm:text-xs mt-1 sm:mt-2 flex items-center gap-0.5 sm:gap-1",
                 impacts.benchmarkComparison.energyPerformance === "Better" ? "text-emerald-600" : "text-red-600"
               )}>
                 {impacts.benchmarkComparison.energyPerformance === "Better" ? (
-                  <TrendingDown className="h-3 w-3" />
+                  <TrendingDown className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
                 ) : (
-                  <TrendingUp className="h-3 w-3" />
+                  <TrendingUp className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
                 )}
-                {impacts.benchmarkComparison.energyPerformance} than industry average
+                <span className="truncate">{impacts.benchmarkComparison.energyPerformance} than avg</span>
               </p>
             )}
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <Droplets className="h-4 w-4 text-sky-600" />
-              Water Usage
+          <CardHeader className="pb-2 sm:pb-3 p-3 sm:p-4 lg:p-6">
+            <CardTitle className="text-xs sm:text-sm font-medium flex items-center gap-1.5 sm:gap-2">
+              <Droplets className="h-3 w-3 sm:h-4 sm:w-4 text-sky-600" />
+              <span className="truncate">Water Usage</span>
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {formatNumber(impacts.totalWaterM3)} <span className="text-sm font-normal text-muted-foreground">m³</span>
+          <CardContent className="p-3 sm:p-4 lg:p-6 pt-0">
+            <div className="text-lg sm:text-xl lg:text-2xl font-bold">
+              {formatNumber(impacts.totalWaterM3)} <span className="text-xs sm:text-sm font-normal text-muted-foreground">m³</span>
             </div>
-            <p className="text-xs text-muted-foreground mt-2">Total water consumed</p>
+            <p className="text-[10px] sm:text-xs text-muted-foreground mt-1 sm:mt-2 truncate">Total water consumed</p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <Trash2 className="h-4 w-4 text-orange-600" />
-              Waste Generated
+          <CardHeader className="pb-2 sm:pb-3 p-3 sm:p-4 lg:p-6">
+            <CardTitle className="text-xs sm:text-sm font-medium flex items-center gap-1.5 sm:gap-2">
+              <Trash2 className="h-3 w-3 sm:h-4 sm:w-4 text-orange-600" />
+              <span className="truncate">Waste</span>
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {formatNumber(impacts.totalWasteTons)} <span className="text-sm font-normal text-muted-foreground">tons</span>
+          <CardContent className="p-3 sm:p-4 lg:p-6 pt-0">
+            <div className="text-lg sm:text-xl lg:text-2xl font-bold">
+              {formatNumber(impacts.totalWasteTons)} <span className="text-xs sm:text-sm font-normal text-muted-foreground">tons</span>
             </div>
-            <p className="text-xs text-muted-foreground mt-2">Total waste produced</p>
+            <p className="text-[10px] sm:text-xs text-muted-foreground mt-1 sm:mt-2 truncate">Total waste produced</p>
           </CardContent>
         </Card>
       </div>
 
-      {/* Tabs for detailed views */}
+      {/* Tabs for detailed views - Mobile Optimized */}
       <Tabs defaultValue="circularity" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="circularity">Circularity Metrics</TabsTrigger>
-          <TabsTrigger value="flow">Material Flow</TabsTrigger>
-          <TabsTrigger value="scenarios">Scenarios</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-3 h-auto">
+          <TabsTrigger value="circularity" className="text-xs sm:text-sm py-2">Circularity</TabsTrigger>
+          <TabsTrigger value="flow" className="text-xs sm:text-sm py-2">Material Flow</TabsTrigger>
+          <TabsTrigger value="scenarios" className="text-xs sm:text-sm py-2">Scenarios</TabsTrigger>
         </TabsList>
 
         {/* Circularity Metrics Tab */}
-        <TabsContent value="circularity" className="space-y-4 mt-6">
+        <TabsContent value="circularity" className="space-y-3 sm:space-y-4 mt-4 sm:mt-6">
           {circularity ? (
             <>
               <Card>
-                <CardHeader>
-                  <CardTitle>Circularity Performance</CardTitle>
-                  <CardDescription>
+                <CardHeader className="p-3 sm:p-4 lg:p-6">
+                  <CardTitle className="text-sm sm:text-base lg:text-lg">Circularity Performance</CardTitle>
+                  <CardDescription className="text-xs sm:text-sm">
                     Material Circularity Indicator (MCI) and related circular economy metrics
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-4 sm:space-y-6 p-3 sm:p-4 lg:p-6 pt-0">
                   {/* Composite Score */}
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium">Overall Circularity Score</span>
+                      <span className="text-xs sm:text-sm font-medium">Overall Circularity Score</span>
                       <Badge className={getCircularityColor(circularity.circularity_grade)}>
                         {circularity.circularity_grade}
                       </Badge>
                     </div>
-                    <Progress value={circularity.composite_score * 100} className="h-3" />
-                    <p className="text-xs text-muted-foreground mt-1">
+                    <Progress value={circularity.composite_score * 100} className="h-2 sm:h-3" />
+                    <p className="text-[10px] sm:text-xs text-muted-foreground mt-1">
                       {Math.round(circularity.composite_score * 100)}% of maximum circularity potential
                     </p>
                   </div>
 
-                  {/* Individual Metrics */}
-                  <div className="grid gap-4 sm:grid-cols-2">
+                  {/* Individual Metrics - Mobile Grid */}
+                  <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2">
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm">MCI Score</span>
-                        <span className="text-sm font-semibold">{circularity.mciScore.toFixed(2)}</span>
+                        <span className="text-xs sm:text-sm">MCI Score</span>
+                        <span className="text-xs sm:text-sm font-semibold">{circularity.mciScore.toFixed(2)}</span>
                       </div>
-                      <Progress value={circularity.mciScore * 100} className="h-2" />
+                      <Progress value={circularity.mciScore * 100} className="h-1.5 sm:h-2" />
                     </div>
 
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm">Recycling Potential</span>
-                        <span className="text-sm font-semibold">{circularity.recyclingPotentialPct.toFixed(1)}%</span>
+                        <span className="text-xs sm:text-sm">Recycling Potential</span>
+                        <span className="text-xs sm:text-sm font-semibold">{circularity.recyclingPotentialPct.toFixed(1)}%</span>
                       </div>
-                      <Progress value={circularity.recyclingPotentialPct} className="h-2" />
+                      <Progress value={circularity.recyclingPotentialPct} className="h-1.5 sm:h-2" />
                     </div>
 
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm">Resource Efficiency</span>
-                        <span className="text-sm font-semibold">{circularity.resourceEfficiencyScore.toFixed(1)}/10</span>
+                        <span className="text-xs sm:text-sm">Resource Efficiency</span>
+                        <span className="text-xs sm:text-sm font-semibold">{circularity.resourceEfficiencyScore.toFixed(1)}/10</span>
                       </div>
-                      <Progress value={circularity.resourceEfficiencyScore * 10} className="h-2" />
+                      <Progress value={circularity.resourceEfficiencyScore * 10} className="h-1.5 sm:h-2" />
                     </div>
 
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm">Reuse Potential</span>
-                        <span className="text-sm font-semibold">{circularity.reusePotentialPct.toFixed(1)}%</span>
+                        <span className="text-xs sm:text-sm">Reuse Potential</span>
+                        <span className="text-xs sm:text-sm font-semibold">{circularity.reusePotentialPct.toFixed(1)}%</span>
                       </div>
-                      <Progress value={circularity.reusePotentialPct} className="h-2" />
+                      <Progress value={circularity.reusePotentialPct} className="h-1.5 sm:h-2" />
                     </div>
                   </div>
 
                   {/* Product Life Extension */}
-                  <div className="rounded-lg border bg-secondary/30 p-4">
-                    <div className="flex items-center gap-3">
-                      <Recycle className="h-5 w-5 text-primary" />
-                      <div>
-                        <p className="font-medium">Extended Product Life</p>
-                        <p className="text-sm text-muted-foreground">
+                  <div className="rounded-lg border bg-secondary/30 p-3 sm:p-4">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <Recycle className="h-4 w-4 sm:h-5 sm:w-5 text-primary shrink-0" />
+                      <div className="min-w-0">
+                        <p className="text-sm sm:text-base font-medium">Extended Product Life</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           {circularity.extendedProductLifeYears.toFixed(0)} years additional lifespan
                         </p>
                       </div>
@@ -378,95 +378,95 @@ export default function LCAResults({ assessmentId, className }: LCAResultsProps)
             </>
           ) : (
             <Card>
-              <CardContent className="p-12 text-center">
-                <Sparkles className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <p className="text-muted-foreground">No circularity metrics available</p>
+              <CardContent className="p-8 sm:p-12 text-center">
+                <Sparkles className="h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground mx-auto mb-3 sm:mb-4" />
+                <p className="text-sm sm:text-base text-muted-foreground">No circularity metrics available</p>
               </CardContent>
             </Card>
           )}
         </TabsContent>
 
-        {/* Material Flow Tab */}
-        <TabsContent value="flow" className="space-y-4 mt-6">
+        {/* Material Flow Tab - Mobile Optimized */}
+        <TabsContent value="flow" className="space-y-3 sm:space-y-4 mt-4 sm:mt-6">
           <Card>
-            <CardHeader>
-              <CardTitle>Material Flow Diagram</CardTitle>
-              <CardDescription>
+            <CardHeader className="p-3 sm:p-4 lg:p-6">
+              <CardTitle className="text-sm sm:text-base lg:text-lg">Material Flow Diagram</CardTitle>
+              <CardDescription className="text-xs sm:text-sm">
                 Lifecycle material flow from extraction through end-of-life
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              {/* Simplified Sankey-style visualization */}
-              <div className="space-y-8 py-6">
+            <CardContent className="p-3 sm:p-4 lg:p-6 pt-0">
+              {/* Simplified Sankey-style visualization - Mobile First */}
+              <div className="space-y-4 sm:space-y-6 lg:space-y-8 py-4 sm:py-6">
                 {/* Stage 1: Extraction */}
-                <div className="flex items-center gap-4">
-                  <div className="w-32 text-right">
-                    <p className="text-sm font-medium">Extraction</p>
-                    <p className="text-xs text-muted-foreground">Raw Material</p>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+                  <div className="w-full sm:w-24 lg:w-32 text-left sm:text-right">
+                    <p className="text-xs sm:text-sm font-medium">Extraction</p>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground">Raw Material</p>
                   </div>
-                  <div className="flex-1 h-12 bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-lg flex items-center justify-center text-white font-semibold">
+                  <div className="w-full sm:flex-1 h-10 sm:h-12 bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-lg flex items-center justify-center text-white text-sm sm:text-base font-semibold">
                     100%
                   </div>
-                  <div className="w-16 text-xs text-muted-foreground">Virgin + Recycled</div>
+                  <div className="hidden sm:block w-16 text-xs text-muted-foreground">Virgin + Recycled</div>
                 </div>
 
                 {/* Stage 2: Processing */}
-                <div className="flex items-center gap-4">
-                  <div className="w-32 text-right">
-                    <p className="text-sm font-medium">Processing</p>
-                    <p className="text-xs text-muted-foreground">Energy Intensive</p>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+                  <div className="w-full sm:w-24 lg:w-32 text-left sm:text-right">
+                    <p className="text-xs sm:text-sm font-medium">Processing</p>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground">Energy Intensive</p>
                   </div>
-                  <div className="flex-1 h-12 bg-gradient-to-r from-amber-500 to-amber-400 rounded-lg flex items-center justify-center text-white font-semibold">
+                  <div className="w-full sm:flex-1 h-10 sm:h-12 bg-gradient-to-r from-amber-500 to-amber-400 rounded-lg flex items-center justify-center text-white text-sm sm:text-base font-semibold">
                     92%
                   </div>
-                  <div className="w-16 text-xs text-muted-foreground">8% waste</div>
+                  <div className="w-full sm:w-16 text-xs text-muted-foreground text-left sm:text-left">8% waste</div>
                 </div>
 
                 {/* Stage 3: Manufacturing */}
-                <div className="flex items-center gap-4">
-                  <div className="w-32 text-right">
-                    <p className="text-sm font-medium">Manufacturing</p>
-                    <p className="text-xs text-muted-foreground">Product Creation</p>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+                  <div className="w-full sm:w-24 lg:w-32 text-left sm:text-right">
+                    <p className="text-xs sm:text-sm font-medium">Manufacturing</p>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground">Product Creation</p>
                   </div>
-                  <div className="flex-1 h-12 bg-gradient-to-r from-sky-500 to-sky-400 rounded-lg flex items-center justify-center text-white font-semibold">
+                  <div className="w-full sm:flex-1 h-10 sm:h-12 bg-gradient-to-r from-sky-500 to-sky-400 rounded-lg flex items-center justify-center text-white text-sm sm:text-base font-semibold">
                     85%
                   </div>
-                  <div className="w-16 text-xs text-muted-foreground">7% scrap</div>
+                  <div className="w-full sm:w-16 text-xs text-muted-foreground text-left sm:text-left">7% scrap</div>
                 </div>
 
                 {/* Stage 4: Use Phase */}
-                <div className="flex items-center gap-4">
-                  <div className="w-32 text-right">
-                    <p className="text-sm font-medium">Use Phase</p>
-                    <p className="text-xs text-muted-foreground">In Service</p>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+                  <div className="w-full sm:w-24 lg:w-32 text-left sm:text-right">
+                    <p className="text-xs sm:text-sm font-medium">Use Phase</p>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground">In Service</p>
                   </div>
-                  <div className="flex-1 h-12 bg-gradient-to-r from-purple-500 to-purple-400 rounded-lg flex items-center justify-center text-white font-semibold">
+                  <div className="w-full sm:flex-1 h-10 sm:h-12 bg-gradient-to-r from-purple-500 to-purple-400 rounded-lg flex items-center justify-center text-white text-sm sm:text-base font-semibold">
                     85%
                   </div>
-                  <div className="w-16 text-xs text-muted-foreground">Long life</div>
+                  <div className="w-full sm:w-16 text-xs text-muted-foreground text-left sm:text-left">Long life</div>
                 </div>
 
                 {/* Stage 5: End of Life */}
-                <div className="flex items-center gap-4">
-                  <div className="w-32 text-right">
-                    <p className="text-sm font-medium">End of Life</p>
-                    <p className="text-xs text-muted-foreground">Recovery</p>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+                  <div className="w-full sm:w-24 lg:w-32 text-left sm:text-right">
+                    <p className="text-xs sm:text-sm font-medium">End of Life</p>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground">Recovery</p>
                   </div>
-                  <div className="flex-1 flex gap-2">
-                    <div className="flex-1 h-12 bg-gradient-to-r from-green-500 to-green-400 rounded-lg flex items-center justify-center text-white font-semibold">
+                  <div className="w-full sm:flex-1 flex gap-2">
+                    <div className="flex-1 h-10 sm:h-12 bg-gradient-to-r from-green-500 to-green-400 rounded-lg flex items-center justify-center text-white text-xs sm:text-sm font-semibold">
                       {circularity?.recyclingPotentialPct.toFixed(0) || "70"}% Recycled
                     </div>
-                    <div className="w-24 h-12 bg-gradient-to-r from-red-500 to-red-400 rounded-lg flex items-center justify-center text-white text-sm font-semibold">
+                    <div className="w-20 sm:w-24 h-10 sm:h-12 bg-gradient-to-r from-red-500 to-red-400 rounded-lg flex items-center justify-center text-white text-xs sm:text-sm font-semibold">
                       {100 - (circularity?.recyclingPotentialPct || 70)}% Waste
                     </div>
                   </div>
-                  <div className="w-16"></div>
+                  <div className="hidden sm:block w-16"></div>
                 </div>
 
                 {/* Circular loop indicator */}
-                <div className="flex items-center justify-center gap-2 pt-4 border-t">
-                  <Recycle className="h-5 w-5 text-emerald-600" />
-                  <p className="text-sm text-muted-foreground">
+                <div className="flex items-center justify-center gap-2 pt-3 sm:pt-4 border-t">
+                  <Recycle className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-600" />
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Circular economy potential: <span className="font-semibold text-foreground">
                       {circularity ? Math.round(circularity.composite_score * 100) : 65}%
                     </span>
@@ -477,19 +477,20 @@ export default function LCAResults({ assessmentId, className }: LCAResultsProps)
           </Card>
         </TabsContent>
 
-        {/* Scenarios Tab */}
-        <TabsContent value="scenarios" className="space-y-4 mt-6">
+        {/* Scenarios Tab - Mobile Optimized */}
+        <TabsContent value="scenarios" className="space-y-3 sm:space-y-4 mt-4 sm:mt-6">
           {scenarios.length > 0 ? (
-            <div className="grid gap-4 lg:grid-cols-2">
+            <div className="grid gap-3 sm:gap-4 grid-cols-1 lg:grid-cols-2">
               {scenarios.map((scenario) => (
                 <Card key={scenario.id}>
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <CardTitle className="text-lg">{scenario.name}</CardTitle>
+                  <CardHeader className="p-3 sm:p-4 lg:p-6">
+                    <div className="flex flex-col sm:flex-row items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <CardTitle className="text-sm sm:text-base lg:text-lg">{scenario.name}</CardTitle>
                         <Badge variant="outline" className="mt-2">{scenario.scenarioType}</Badge>
                       </div>
                       <Badge className={cn(
+                        "self-start sm:self-auto",
                         scenario.feasibility_score > 0.7 ? "bg-emerald-600" :
                         scenario.feasibility_score > 0.5 ? "bg-amber-600" : "bg-red-600"
                       )}>
@@ -497,34 +498,34 @@ export default function LCAResults({ assessmentId, className }: LCAResultsProps)
                       </Badge>
                     </div>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
+                  <CardContent className="space-y-3 sm:space-y-4 p-3 sm:p-4 lg:p-6 pt-0">
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
                       <div>
-                        <p className="text-sm text-muted-foreground">CO₂ Reduction</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">CO₂ Reduction</p>
                         <p className={cn(
-                          "text-xl font-bold",
+                          "text-lg sm:text-xl font-bold",
                           scenario.co2ReductionPct > 0 ? "text-emerald-600" : "text-red-600"
                         )}>
                           {scenario.co2ReductionPct > 0 ? "-" : "+"}{Math.abs(scenario.co2ReductionPct).toFixed(1)}%
                         </p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Cost Difference</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">Cost Difference</p>
                         <p className={cn(
-                          "text-xl font-bold",
+                          "text-lg sm:text-xl font-bold",
                           scenario.costDifferencePct < 0 ? "text-emerald-600" : "text-red-600"
                         )}>
                           {scenario.costDifferencePct > 0 ? "+" : ""}{scenario.costDifferencePct.toFixed(1)}%
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center justify-between text-xs sm:text-sm">
                       <span className="text-muted-foreground">Complexity:</span>
                       <Badge variant="secondary">{scenario.implementation_complexity}</Badge>
                     </div>
                     <Button className="w-full" variant="outline" size="sm">
                       View Details
-                      <ArrowRight className="h-4 w-4 ml-2" />
+                      <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 ml-2" />
                     </Button>
                   </CardContent>
                 </Card>
@@ -532,9 +533,9 @@ export default function LCAResults({ assessmentId, className }: LCAResultsProps)
             </div>
           ) : (
             <Card>
-              <CardContent className="p-12 text-center">
-                <BarChart3 className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <p className="text-muted-foreground mb-4">No scenarios created yet</p>
+              <CardContent className="p-8 sm:p-12 text-center">
+                <BarChart3 className="h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground mx-auto mb-3 sm:mb-4" />
+                <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4">No scenarios created yet</p>
                 <Button>
                   Create Scenario
                   <ArrowRight className="h-4 w-4 ml-2" />

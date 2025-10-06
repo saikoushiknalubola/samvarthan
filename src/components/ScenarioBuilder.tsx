@@ -343,23 +343,23 @@ export default function ScenarioBuilder({
     <TooltipProvider>
       <div
         className={cn(
-          "w-full max-w-full bg-card rounded-2xl border border-border shadow-sm",
-          "p-4 sm:p-6",
+          "w-full max-w-full bg-card rounded-xl sm:rounded-2xl border border-border shadow-sm",
+          "p-3 sm:p-4 lg:p-6",
           className
         )}
         aria-label="Scenario comparison and analysis"
       >
-        <div className="flex w-full items-start justify-between gap-3">
-          <div className="flex items-center gap-2 min-w-0">
-            <GitCompare className="size-5 text-[--sidebar-primary]" aria-hidden="true" />
-            <h2 className="text-base sm:text-lg md:text-xl font-semibold tracking-tight truncate">
+        <div className="flex w-full items-start justify-between gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <GitCompare className="size-4 sm:size-5 text-[--sidebar-primary] shrink-0" aria-hidden="true" />
+            <h2 className="text-sm sm:text-base lg:text-lg xl:text-xl font-semibold tracking-tight truncate">
               Scenario Builder & Comparison
             </h2>
-            <Badge variant="secondary" className="ml-1 rounded-full">
+            <Badge variant="secondary" className="ml-1 rounded-full text-xs">
               LCA
             </Badge>
           </div>
-          <div className="hidden sm:flex items-center gap-2">
+          <div className="hidden lg:flex items-center gap-2">
             <Button variant="ghost" size="icon" aria-label="Comparison layout">
               <Columns3 className="size-5" />
             </Button>
@@ -369,36 +369,36 @@ export default function ScenarioBuilder({
           </div>
         </div>
 
-        <Separator className="my-4" />
+        <Separator className="my-3 sm:my-4" />
 
         <Tabs defaultValue="builder" className="w-full">
-          <TabsList className="grid grid-cols-2 w-full bg-secondary">
-            <TabsTrigger value="builder" className="data-[state=active]:bg-card">
-              <Diff className="mr-2 size-4" /> Create Scenario
+          <TabsList className="grid grid-cols-2 w-full bg-secondary h-auto">
+            <TabsTrigger value="builder" className="data-[state=active]:bg-card py-2 text-xs sm:text-sm">
+              <Diff className="mr-1 sm:mr-2 size-3 sm:size-4" /> Create
             </TabsTrigger>
-            <TabsTrigger value="compare" className="data-[state=active]:bg-card">
-              <ChartNoAxesCombined className="mr-2 size-4" /> Compare & Optimize
+            <TabsTrigger value="compare" className="data-[state=active]:bg-card py-2 text-xs sm:text-sm">
+              <ChartNoAxesCombined className="mr-1 sm:mr-2 size-3 sm:size-4" /> Compare
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="builder" className="mt-4">
-            <Card className="w-full bg-secondary border-border p-4 sm:p-6 rounded-xl">
-              <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
-                <div className="grid gap-3">
-                  <Label htmlFor="scenario-name">Scenario name</Label>
+          <TabsContent value="builder" className="mt-3 sm:mt-4">
+            <Card className="w-full bg-secondary border-border p-3 sm:p-4 lg:p-6 rounded-xl">
+              <div className="grid gap-3 sm:gap-4 lg:gap-6 grid-cols-1 md:grid-cols-2">
+                <div className="grid gap-2 sm:gap-3">
+                  <Label htmlFor="scenario-name" className="text-xs sm:text-sm">Scenario name</Label>
                   <Input
                     id="scenario-name"
                     value={builderName}
                     onChange={(e) => setBuilderName(e.target.value)}
                     placeholder="e.g., 40% recycling + renewable energy"
-                    className="bg-card"
+                    className="bg-card h-9 sm:h-10 text-sm"
                   />
                 </div>
 
-                <div className="grid gap-3">
-                  <Label>Clone from</Label>
+                <div className="grid gap-2 sm:gap-3">
+                  <Label className="text-xs sm:text-sm">Clone from</Label>
                   <Select value={cloneFrom} onValueChange={handleCloneChange}>
-                    <SelectTrigger className="bg-card">
+                    <SelectTrigger className="bg-card h-9 sm:h-10 text-sm">
                       <SelectValue placeholder="Select a scenario to clone" />
                     </SelectTrigger>
                     <SelectContent>
@@ -412,12 +412,12 @@ export default function ScenarioBuilder({
                 </div>
               </div>
 
-              <Separator className="my-6" />
+              <Separator className="my-4 sm:my-6" />
 
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
                 <div className="grid gap-2">
-                  <Label htmlFor="recycling">Recycling percentage</Label>
-                  <div className="flex items-center gap-3">
+                  <Label htmlFor="recycling" className="text-xs sm:text-sm">Recycling percentage</Label>
+                  <div className="flex items-center gap-2 sm:gap-3">
                     <input
                       id="recycling"
                       type="range"
@@ -431,21 +431,21 @@ export default function ScenarioBuilder({
                       className="w-full accent-[--primary]"
                       aria-label="Recycling percentage"
                     />
-                    <Badge variant="outline" className="min-w-[3.5rem] justify-center">
+                    <Badge variant="outline" className="min-w-[3rem] justify-center text-xs">
                       {params.recycling}%
                     </Badge>
                   </div>
                 </div>
 
                 <div className="grid gap-2">
-                  <Label>Energy source</Label>
+                  <Label className="text-xs sm:text-sm">Energy source</Label>
                   <Select
                     value={params.energySource}
                     onValueChange={(v: ScenarioParams["energySource"]) =>
                       setParams((p) => ({ ...p, energySource: v }))
                     }
                   >
-                    <SelectTrigger className="bg-card">
+                    <SelectTrigger className="bg-card h-9 sm:h-10 text-sm">
                       <SelectValue placeholder="Select energy mix" />
                     </SelectTrigger>
                     <SelectContent>
@@ -457,14 +457,14 @@ export default function ScenarioBuilder({
                 </div>
 
                 <div className="grid gap-2">
-                  <Label>Material substitution</Label>
+                  <Label className="text-xs sm:text-sm">Material substitution</Label>
                   <Select
                     value={params.materialSubstitution}
                     onValueChange={(v: ScenarioParams["materialSubstitution"]) =>
                       setParams((p) => ({ ...p, materialSubstitution: v }))
                     }
                   >
-                    <SelectTrigger className="bg-card">
+                    <SelectTrigger className="bg-card h-9 sm:h-10 text-sm">
                       <SelectValue placeholder="Select material option" />
                     </SelectTrigger>
                     <SelectContent>
@@ -476,14 +476,14 @@ export default function ScenarioBuilder({
                 </div>
 
                 <div className="grid gap-2">
-                  <Label>Processing method</Label>
+                  <Label className="text-xs sm:text-sm">Processing method</Label>
                   <Select
                     value={params.processing}
                     onValueChange={(v: ScenarioParams["processing"]) =>
                       setParams((p) => ({ ...p, processing: v }))
                     }
                   >
-                    <SelectTrigger className="bg-card">
+                    <SelectTrigger className="bg-card h-9 sm:h-10 text-sm">
                       <SelectValue placeholder="Select processing" />
                     </SelectTrigger>
                     <SelectContent>
@@ -495,11 +495,11 @@ export default function ScenarioBuilder({
                 </div>
               </div>
 
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div className="text-sm text-muted-foreground">
+              <div className="mt-4 sm:mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div className="text-xs sm:text-sm text-muted-foreground">
                   Compare changes against the baseline to see percentage improvements across key KPIs.
                 </div>
-                <Button onClick={handleCreateScenario} className="bg-[--primary] text-[--primary-foreground]">
+                <Button onClick={handleCreateScenario} className="bg-[--primary] text-[--primary-foreground] h-9 sm:h-10 text-sm">
                   <ChartColumnBig className="mr-2 size-4" />
                   Create Scenario
                 </Button>
@@ -507,57 +507,59 @@ export default function ScenarioBuilder({
             </Card>
           </TabsContent>
 
-          <TabsContent value="compare" className="mt-4">
-            <div className="flex flex-col gap-4">
-              <Card className="w-full p-4 sm:p-5 bg-secondary rounded-xl">
-                <div className="flex flex-col lg:flex-row gap-4 lg:items-end">
+          <TabsContent value="compare" className="mt-3 sm:mt-4">
+            <div className="flex flex-col gap-3 sm:gap-4">
+              <Card className="w-full p-3 sm:p-4 lg:p-5 bg-secondary rounded-xl">
+                <div className="flex flex-col gap-3 sm:gap-4">
                   <div className="flex-1 min-w-0 grid gap-2">
-                    <Label htmlFor="search">Filter scenarios</Label>
+                    <Label htmlFor="search" className="text-xs sm:text-sm">Filter scenarios</Label>
                     <Input
                       id="search"
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
                       placeholder="Search by name..."
-                      className="bg-card"
+                      className="bg-card h-9 sm:h-10 text-sm"
                     />
                   </div>
-                  <div className="grid gap-2">
-                    <Label>Status</Label>
-                    <Select
-                      value={filterMode}
-                      onValueChange={(v: FilterMode) => setFilterMode(v)}
-                    >
-                      <SelectTrigger className="bg-card">
-                        <SelectValue placeholder="All statuses" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All</SelectItem>
-                        <SelectItem value="improved">Improved</SelectItem>
-                        <SelectItem value="regressed">Regressed</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="grid gap-2">
-                    <Label>Sort by</Label>
-                    <Select
-                      value={sortBy}
-                      onValueChange={(v: keyof Metrics) => setSortBy(v)}
-                    >
-                      <SelectTrigger className="bg-card">
-                        <SelectValue placeholder="Select metric" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="emissions">Emissions</SelectItem>
-                        <SelectItem value="energy">Energy</SelectItem>
-                        <SelectItem value="water">Water</SelectItem>
-                        <SelectItem value="waste">Waste</SelectItem>
-                      </SelectContent>
-                    </Select>
+                  <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                    <div className="grid gap-2">
+                      <Label className="text-xs sm:text-sm">Status</Label>
+                      <Select
+                        value={filterMode}
+                        onValueChange={(v: FilterMode) => setFilterMode(v)}
+                      >
+                        <SelectTrigger className="bg-card h-9 sm:h-10 text-sm">
+                          <SelectValue placeholder="All statuses" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All</SelectItem>
+                          <SelectItem value="improved">Improved</SelectItem>
+                          <SelectItem value="regressed">Regressed</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="grid gap-2">
+                      <Label className="text-xs sm:text-sm">Sort by</Label>
+                      <Select
+                        value={sortBy}
+                        onValueChange={(v: keyof Metrics) => setSortBy(v)}
+                      >
+                        <SelectTrigger className="bg-card h-9 sm:h-10 text-sm">
+                          <SelectValue placeholder="Select metric" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="emissions">Emissions</SelectItem>
+                          <SelectItem value="energy">Energy</SelectItem>
+                          <SelectItem value="water">Water</SelectItem>
+                          <SelectItem value="waste">Waste</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
                 </div>
               </Card>
 
-              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              <div className="grid gap-3 sm:gap-4 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
                 {filteredSortedScenarios.map((s, idx) => (
                   <Card
                     key={s.id}
@@ -569,30 +571,30 @@ export default function ScenarioBuilder({
                     onDragOver={onDragOver}
                     onDrop={onDrop(idx)}
                     className={cn(
-                      "bg-card border-border rounded-xl p-4 sm:p-5 transition-colors",
+                      "bg-card border-border rounded-xl p-3 sm:p-4 lg:p-5 transition-colors",
                       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--ring]"
                     )}
                     style={{ cursor: "grab" }}
                   >
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="min-w-0">
+                    <div className="flex items-start justify-between gap-2 sm:gap-3">
+                      <div className="min-w-0 flex-1">
                         <Input
                           value={s.name}
                           onChange={(e) => handleNameChange(s.id, e.target.value)}
                           className={cn(
-                            "h-9 bg-secondary/60 border-transparent px-2 -mx-2",
+                            "h-8 sm:h-9 bg-secondary/60 border-transparent px-2 -mx-2 text-sm",
                             "focus-visible:border-input focus-visible:bg-card"
                           )}
                           aria-label="Scenario name"
                         />
-                        <div className="mt-1 flex items-center gap-2">
+                        <div className="mt-1 flex items-center gap-2 flex-wrap">
                           {s.baseline ? (
-                            <Badge className="bg-[--accent] text-[--accent-foreground]">Baseline</Badge>
+                            <Badge className="bg-[--accent] text-[--accent-foreground] text-xs">Baseline</Badge>
                           ) : (
-                            <Badge variant="outline">Clone</Badge>
+                            <Badge variant="outline" className="text-xs">Clone</Badge>
                           )}
                           {!s.baseline && baseline && (
-                            <span className="text-xs text-muted-foreground">
+                            <span className="text-[10px] sm:text-xs text-muted-foreground truncate">
                               vs {baseline.name}
                             </span>
                           )}
@@ -607,6 +609,7 @@ export default function ScenarioBuilder({
                                 variant="outline"
                                 onClick={() => handleSave(s)}
                                 aria-label="Save scenario"
+                                className="h-8 text-xs"
                               >
                                 Save
                               </Button>
@@ -618,8 +621,8 @@ export default function ScenarioBuilder({
                     </div>
 
                     {baseline && (
-                      <div className="mt-4 grid gap-4">
-                        <div className="grid grid-cols-4 gap-3">
+                      <div className="mt-3 sm:mt-4 grid gap-3 sm:gap-4">
+                        <div className="grid grid-cols-2 gap-2 sm:gap-3">
                           {metricMeta.map((m) => {
                             const baseVal = baseline.metrics[m.key];
                             const val = s.metrics[m.key];
@@ -639,15 +642,15 @@ export default function ScenarioBuilder({
                                 : "bg-[--destructive]/10";
                             return (
                               <div key={m.key} className="min-w-0">
-                                <div className="text-xs text-muted-foreground">{m.label}</div>
+                                <div className="text-[10px] sm:text-xs text-muted-foreground">{m.label}</div>
                                 <div className="flex items-baseline gap-1">
-                                  <div className="text-sm font-semibold">
+                                  <div className="text-xs sm:text-sm font-semibold truncate">
                                     {formatNumber(val)}
                                   </div>
-                                  <div className="text-xs text-muted-foreground">{m.unit}</div>
+                                  <div className="text-[10px] sm:text-xs text-muted-foreground">{m.unit}</div>
                                 </div>
-                                <div className={cn("mt-1 inline-flex items-center gap-1 rounded px-2 py-0.5", bg)}>
-                                  <span className={cn("text-xs font-medium", color)}>
+                                <div className={cn("mt-1 inline-flex items-center gap-1 rounded px-1.5 sm:px-2 py-0.5", bg)}>
+                                  <span className={cn("text-[10px] sm:text-xs font-medium", color)}>
                                     {diff > 0 ? "+" : ""}
                                     {diff.toFixed(1)}%
                                   </span>
@@ -662,29 +665,28 @@ export default function ScenarioBuilder({
 
                         <div>
                           <div className="mb-2 flex items-center gap-2">
-                            <ChartNoAxesCombined className="size-4 text-muted-foreground" />
-                            <span className="text-sm font-medium">Metric comparison</span>
+                            <ChartNoAxesCombined className="size-3 sm:size-4 text-muted-foreground" />
+                            <span className="text-xs sm:text-sm font-medium">Metric comparison</span>
                           </div>
-                          <div className="w-full max-w-full">
-                            <div className="grid grid-cols-4 gap-3">
+                          <div className="w-full max-w-full overflow-hidden">
+                            <div className="grid grid-cols-2 gap-2 sm:gap-3">
                               {metricMeta.map((m) => {
                                 const baseVal = baseline.metrics[m.key];
                                 const val = s.metrics[m.key];
                                 const max = Math.max(baseVal, val);
-                                // Avoid overflow and ensure always visible
                                 const basePct = max ? (baseVal / max) * 100 : 0;
                                 const valPct = max ? (val / max) * 100 : 0;
                                 return (
                                   <div key={m.key} className="min-w-0">
-                                    <div className="h-16 w-full max-w-full rounded-md bg-muted p-1">
+                                    <div className="h-12 sm:h-16 w-full max-w-full rounded-md bg-muted p-1">
                                       <div
-                                        className="h-2 rounded-sm bg-foreground/20"
+                                        className="h-1.5 sm:h-2 rounded-sm bg-foreground/20"
                                         style={{ width: `${basePct}%` }}
                                         aria-label={`${m.label} baseline bar`}
                                         title={`Baseline ${m.label}: ${formatNumber(baseVal)} ${m.unit}`}
                                       />
                                       <div
-                                        className="mt-1.5 h-3 rounded-sm"
+                                        className="mt-1 sm:mt-1.5 h-2 sm:h-3 rounded-sm"
                                         style={{
                                           width: `${valPct}%`,
                                           backgroundColor: m.colorVar,
@@ -693,7 +695,7 @@ export default function ScenarioBuilder({
                                         title={`${s.name} ${m.label}: ${formatNumber(val)} ${m.unit}`}
                                       />
                                     </div>
-                                    <div className="mt-1 text-[10px] text-muted-foreground">
+                                    <div className="mt-1 text-[9px] sm:text-[10px] text-muted-foreground truncate">
                                       {m.label}
                                     </div>
                                   </div>
@@ -704,21 +706,21 @@ export default function ScenarioBuilder({
                         </div>
 
                         <div className="grid gap-2">
-                          <div className="text-xs text-muted-foreground">Parameters</div>
-                          <div className="grid grid-cols-2 gap-2 text-sm">
-                            <div className="min-w-0">
+                          <div className="text-[10px] sm:text-xs text-muted-foreground">Parameters</div>
+                          <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-xs sm:text-sm">
+                            <div className="min-w-0 truncate">
                               <span className="text-muted-foreground">Recycling:</span>{" "}
                               <span className="font-medium">{s.params.recycling}%</span>
                             </div>
-                            <div className="min-w-0">
+                            <div className="min-w-0 truncate">
                               <span className="text-muted-foreground">Energy:</span>{" "}
                               <span className="font-medium capitalize">{s.params.energySource}</span>
                             </div>
-                            <div className="min-w-0">
+                            <div className="min-w-0 truncate">
                               <span className="text-muted-foreground">Material:</span>{" "}
                               <span className="font-medium">{s.params.materialSubstitution}</span>
                             </div>
-                            <div className="min-w-0">
+                            <div className="min-w-0 truncate">
                               <span className="text-muted-foreground">Processing:</span>{" "}
                               <span className="font-medium">{s.params.processing}</span>
                             </div>
@@ -730,29 +732,29 @@ export default function ScenarioBuilder({
                 ))}
               </div>
 
-              <Card className="w-full bg-secondary p-4 sm:p-6 rounded-xl">
+              <Card className="w-full bg-secondary p-3 sm:p-4 lg:p-6 rounded-xl">
                 <div className="flex items-center gap-2 mb-3">
-                  <ChartColumnBig className="size-4 text-muted-foreground" />
-                  <h3 className="text-sm sm:text-base font-semibold">Scenario optimization</h3>
+                  <ChartColumnBig className="size-3 sm:size-4 text-muted-foreground" />
+                  <h3 className="text-xs sm:text-sm lg:text-base font-semibold">Scenario optimization</h3>
                 </div>
-                <div className="grid gap-4 lg:grid-cols-2">
-                  <div className="grid gap-3">
-                    <div className="text-sm text-muted-foreground">
+                <div className="grid gap-3 sm:gap-4 lg:grid-cols-2">
+                  <div className="grid gap-2 sm:gap-3">
+                    <div className="text-xs sm:text-sm text-muted-foreground">
                       Most impactful changes based on your current parameter selections:
                     </div>
-                    <div className="grid gap-3">
+                    <div className="grid gap-2 sm:gap-3">
                       {optimizationInsights.slice(0, 3).map((ins, i) => (
                         <div
                           key={ins.label}
-                          className="rounded-lg bg-card border border-border p-3"
+                          className="rounded-lg bg-card border border-border p-2 sm:p-3"
                         >
-                          <div className="flex items-center justify-between gap-2">
-                            <div className="font-medium text-sm">{i + 1}. {ins.label}</div>
-                            <Badge variant="outline">
+                          <div className="flex items-center justify-between gap-2 flex-wrap">
+                            <div className="font-medium text-xs sm:text-sm">{i + 1}. {ins.label}</div>
+                            <Badge variant="outline" className="text-xs">
                               Avg Δ {(ins.totalImpact >= 0 ? "+" : "")}{ins.totalImpact.toFixed(1)}%
                             </Badge>
                           </div>
-                          <div className="mt-2 grid grid-cols-4 gap-2">
+                          <div className="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2">
                             {ins.deltas.map((d) => {
                               const meta = metricMeta.find((m) => m.key === d.key)!;
                               const improved = d.value < 0;
@@ -764,8 +766,8 @@ export default function ScenarioBuilder({
                                   : "text-[--destructive]";
                               return (
                                 <div key={d.key} className="min-w-0">
-                                  <div className="text-[10px] text-muted-foreground">{meta.label}</div>
-                                  <div className={cn("text-xs font-medium", color)}>
+                                  <div className="text-[9px] sm:text-[10px] text-muted-foreground truncate">{meta.label}</div>
+                                  <div className={cn("text-[10px] sm:text-xs font-medium", color)}>
                                     {d.value > 0 ? "+" : ""}
                                     {d.value.toFixed(1)}%
                                   </div>
@@ -776,20 +778,19 @@ export default function ScenarioBuilder({
                         </div>
                       ))}
                       {optimizationInsights.length === 0 && (
-                        <div className="text-sm text-muted-foreground">No insights available.</div>
+                        <div className="text-xs sm:text-sm text-muted-foreground">No insights available.</div>
                       )}
                     </div>
                   </div>
 
                   {baseline && (
-                    <div className="grid gap-3">
-                      <div className="text-sm text-muted-foreground">
+                    <div className="grid gap-2 sm:gap-3">
+                      <div className="text-xs sm:text-sm text-muted-foreground">
                         Aggregate comparison against baseline:
                       </div>
-                      <div className="rounded-lg bg-card border border-border p-3">
-                        <div className="grid gap-3">
+                      <div className="rounded-lg bg-card border border-border p-2 sm:p-3">
+                        <div className="grid gap-2 sm:gap-3">
                           {metricMeta.map((m) => {
-                            // compute best scenario improvement
                             const best = scenarios.reduce(
                               (acc, s) => {
                                 const d = pctDiff(s.metrics[m.key], baseline.metrics[m.key]);
@@ -800,11 +801,11 @@ export default function ScenarioBuilder({
                             );
                             const improved = best.diff < 0;
                             return (
-                              <div key={m.key} className="grid items-center gap-2 sm:grid-cols-3">
-                                <div className="text-sm font-medium">{m.label}</div>
-                                <div className="h-2 rounded-full bg-muted sm:col-span-2 overflow-hidden">
+                              <div key={m.key} className="grid grid-cols-1 sm:grid-cols-3 items-center gap-2">
+                                <div className="text-xs sm:text-sm font-medium truncate">{m.label}</div>
+                                <div className="h-1.5 sm:h-2 rounded-full bg-muted overflow-hidden">
                                   <div
-                                    className="h-2"
+                                    className="h-1.5 sm:h-2"
                                     style={{
                                       width: `${Math.min(100, Math.abs(best.diff))}%`,
                                       backgroundColor: m.colorVar,
@@ -813,7 +814,7 @@ export default function ScenarioBuilder({
                                     title={`${m.label} best: ${best.name} (${best.diff.toFixed(1)}%)`}
                                   />
                                 </div>
-                                <div className={cn("text-xs", improved ? "text-[--primary]" : "text-muted-foreground")}>
+                                <div className={cn("text-[10px] sm:text-xs truncate", improved ? "text-[--primary]" : "text-muted-foreground")}>
                                   {best.name} {improved ? best.diff.toFixed(1) + "%" : "0%"}
                                 </div>
                               </div>
