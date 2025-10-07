@@ -35,10 +35,10 @@ export default function RootLayout({
         {/* Single Global Header Navigation */}
         <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-card/95 backdrop-blur-md shadow-sm">
           <div className="mx-auto max-w-7xl px-3 sm:px-4 lg:px-8">
-            <div className="flex h-14 sm:h-16 items-center justify-between gap-4 sm:gap-6">
+            <div className="flex h-16 sm:h-18 items-center justify-between gap-4 sm:gap-6">
               <div className="flex items-center gap-4 sm:gap-8">
-                <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group">
-                  <div className="relative h-8 w-8 sm:h-9 sm:w-9 rounded-lg overflow-hidden shadow-lg group-hover:shadow-xl transition-all flex-shrink-0">
+                <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group">
+                  <div className="relative h-12 w-12 sm:h-14 sm:w-14 rounded-full overflow-hidden shadow-xl group-hover:shadow-2xl transition-all flex-shrink-0 ring-2 ring-primary/20 group-hover:ring-primary/40">
                     <img 
                       src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/samvatana-draft-logo-1759812040224.jpeg"
                       alt="SAMVARTANA Logo"
@@ -46,8 +46,8 @@ export default function RootLayout({
                     />
                   </div>
                   <div className="flex flex-col min-w-0">
-                    <h1 className="text-base sm:text-lg font-bold tracking-tight truncate">SAMVARTANA</h1>
-                    <p className="text-[10px] sm:text-xs text-muted-foreground truncate hidden xs:block">Circular Mining Intelligence</p>
+                    <h1 className="text-lg sm:text-xl font-bold tracking-tight truncate">SAMVARTANA</h1>
+                    <p className="text-xs sm:text-sm text-primary font-semibold truncate">Complete the Cycle</p>
                   </div>
                 </Link>
                 <nav className="hidden md:flex items-center gap-4 lg:gap-6 text-sm font-medium">
@@ -59,10 +59,10 @@ export default function RootLayout({
                 </nav>
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
-                <Button asChild variant="ghost" size="sm" className="hidden sm:flex h-8 sm:h-9 text-xs sm:text-sm">
+                <Button asChild variant="ghost" size="sm" className="hidden sm:flex h-9 sm:h-10 text-xs sm:text-sm">
                   <Link href="/lca">Start Assessment</Link>
                 </Button>
-                <Button asChild size="sm" className="shadow-md hover:shadow-lg transition-all h-8 sm:h-9 text-xs sm:text-sm">
+                <Button asChild size="sm" className="shadow-md hover:shadow-lg transition-all h-9 sm:h-10 text-xs sm:text-sm">
                   <Link href="/platform">Dashboard</Link>
                 </Button>
               </div>
