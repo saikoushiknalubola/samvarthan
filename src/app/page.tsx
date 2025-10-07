@@ -367,16 +367,16 @@ export default function Page() {
             {/* Top Row - Logo and Copyright */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-border/40">
               <div className="flex items-center gap-3">
-                <div className="relative h-12 w-12 rounded-full overflow-hidden shadow-xl flex-shrink-0 ring-2 ring-primary/20">
+                <div className="relative h-12 w-12 rounded-full overflow-hidden shadow-xl flex-shrink-0 ring-2 ring-primary/20 bg-primary">
                   <img 
                     src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/samvatana-draft-logo-1759812040224.jpeg"
                     alt="SAMVARTANA Logo"
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover scale-150"
                   />
                 </div>
                 <div>
                   <span className="font-bold text-lg">SAMVARTANA</span>
-                  <p className="text-xs text-primary font-semibold">Complete the Cycle</p>
+                  <p className="text-xs text-primary font-semibold">Circular Mining Intelligence</p>
                 </div>
               </div>
               <p className="text-sm text-muted-foreground text-center">
