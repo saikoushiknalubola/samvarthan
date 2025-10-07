@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
 import { 
   ArrowRight, 
   BarChart3, 
@@ -24,6 +25,45 @@ import {
   Download
 } from "lucide-react";
 
+// Animation variants
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, ease: "easeOut" }
+};
+
+const fadeIn = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { duration: 0.6 }
+};
+
+const scaleIn = {
+  initial: { opacity: 0, scale: 0.95 },
+  animate: { opacity: 1, scale: 1 },
+  transition: { duration: 0.5, ease: "easeOut" }
+};
+
+const staggerContainer = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const slideInLeft = {
+  initial: { opacity: 0, x: -20 },
+  animate: { opacity: 1, x: 0 },
+  transition: { duration: 0.6, ease: "easeOut" }
+};
+
+const slideInRight = {
+  initial: { opacity: 0, x: 20 },
+  animate: { opacity: 1, x: 0 },
+  transition: { duration: 0.6, ease: "easeOut" }
+};
+
 export default function Page() {
   return (
     <div className="min-h-dvh w-full">
@@ -31,24 +71,49 @@ export default function Page() {
         {/* Hero Section with Visual Impact */}
         <section className="pt-8 sm:pt-12 pb-12 sm:pb-16">
           <div className="text-center max-w-5xl mx-auto mb-12 sm:mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6 sm:mb-8 animate-fade-in">
+            <motion.div 
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6 sm:mb-8"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
               <Globe className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium text-primary">Professional LCA Platform for Mining Industry</span>
-            </div>
+            </motion.div>
             
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6 sm:mb-8 leading-tight">
+            <motion.h2 
+              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6 sm:mb-8 leading-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+            >
               <span className="block">Transform Mining with</span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-emerald-600 to-teal-600 mt-2 sm:mt-3">
+              <motion.span 
+                className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-emerald-600 to-teal-600 mt-2 sm:mt-3"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+              >
                 Data-Driven Circularity
-              </span>
-            </h2>
+              </motion.span>
+            </motion.h2>
             
-            <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4">
+            <motion.p 
+              className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
+            >
               Comprehensive Life Cycle Assessment and circular mining intelligence. 
               Accelerate sustainable mineral processing with data-driven insights.
-            </p>
+            </motion.p>
             
-            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 px-4">
+            <motion.div 
+              className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 px-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.8, ease: "easeOut" }}
+            >
               <Button 
                 asChild 
                 size="lg" 
@@ -73,10 +138,15 @@ export default function Page() {
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </Button>
-            </div>
+            </motion.div>
 
             {/* Live Metrics Dashboard */}
-            <div className="rounded-2xl sm:rounded-3xl bg-gradient-to-br from-card to-accent/10 border border-border shadow-2xl p-6 sm:p-8">
+            <motion.div 
+              className="rounded-2xl sm:rounded-3xl bg-gradient-to-br from-card to-accent/10 border border-border shadow-2xl p-6 sm:p-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1, ease: "easeOut" }}
+            >
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
                 <h3 className="text-base sm:text-lg font-semibold flex items-center gap-2">
                   <Database className="h-5 w-5 text-primary" />
@@ -88,8 +158,16 @@ export default function Page() {
                 </div>
               </div>
               
-              <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-                <div className="group rounded-xl sm:rounded-2xl border border-border bg-card p-4 sm:p-6 hover:shadow-xl hover:border-emerald-200 transition-all duration-300">
+              <motion.div 
+                className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+                variants={staggerContainer}
+                initial="initial"
+                animate="animate"
+              >
+                <motion.div 
+                  className="group rounded-xl sm:rounded-2xl border border-border bg-card p-4 sm:p-6 hover:shadow-xl hover:border-emerald-200 transition-all duration-300"
+                  variants={fadeInUp}
+                >
                   <div className="flex items-center justify-between mb-3 sm:mb-4">
                     <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-br from-emerald-100 to-emerald-50 flex items-center justify-center group-hover:scale-110 transition-transform">
                       <TrendingDown className="h-5 w-5 sm:h-6 sm:w-6 text-emerald-600" />
@@ -98,9 +176,12 @@ export default function Page() {
                   </div>
                   <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-1">CO₂ Emissions</p>
                   <p className="text-2xl sm:text-3xl font-bold">9,420<span className="text-base sm:text-lg font-normal text-muted-foreground ml-1">tCO₂e</span></p>
-                </div>
+                </motion.div>
 
-                <div className="group rounded-xl sm:rounded-2xl border border-border bg-card p-4 sm:p-6 hover:shadow-xl hover:border-amber-200 transition-all duration-300">
+                <motion.div 
+                  className="group rounded-xl sm:rounded-2xl border border-border bg-card p-4 sm:p-6 hover:shadow-xl hover:border-amber-200 transition-all duration-300"
+                  variants={fadeInUp}
+                >
                   <div className="flex items-center justify-between mb-3 sm:mb-4">
                     <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-br from-amber-100 to-amber-50 flex items-center justify-center group-hover:scale-110 transition-transform">
                       <Zap className="h-5 w-5 sm:h-6 sm:w-6 text-amber-600" />
@@ -109,9 +190,12 @@ export default function Page() {
                   </div>
                   <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-1">Energy Efficiency</p>
                   <p className="text-2xl sm:text-3xl font-bold">2.74M<span className="text-base sm:text-lg font-normal text-muted-foreground ml-1">kWh</span></p>
-                </div>
+                </motion.div>
 
-                <div className="group rounded-xl sm:rounded-2xl border border-border bg-card p-4 sm:p-6 hover:shadow-xl hover:border-sky-200 transition-all duration-300">
+                <motion.div 
+                  className="group rounded-xl sm:rounded-2xl border border-border bg-card p-4 sm:p-6 hover:shadow-xl hover:border-sky-200 transition-all duration-300"
+                  variants={fadeInUp}
+                >
                   <div className="flex items-center justify-between mb-3 sm:mb-4">
                     <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-br from-sky-100 to-sky-50 flex items-center justify-center group-hover:scale-110 transition-transform">
                       <Recycle className="h-5 w-5 sm:h-6 sm:w-6 text-sky-600" />
@@ -120,9 +204,12 @@ export default function Page() {
                   </div>
                   <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-1">Water Usage</p>
                   <p className="text-2xl sm:text-3xl font-bold">760k<span className="text-base sm:text-lg font-normal text-muted-foreground ml-1">m³</span></p>
-                </div>
+                </motion.div>
 
-                <div className="group rounded-xl sm:rounded-2xl border border-border bg-card p-4 sm:p-6 hover:shadow-xl hover:border-purple-200 transition-all duration-300">
+                <motion.div 
+                  className="group rounded-xl sm:rounded-2xl border border-border bg-card p-4 sm:p-6 hover:shadow-xl hover:border-purple-200 transition-all duration-300"
+                  variants={fadeInUp}
+                >
                   <div className="flex items-center justify-between mb-3 sm:mb-4">
                     <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center group-hover:scale-110 transition-transform">
                       <TrendingUp className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
@@ -131,17 +218,29 @@ export default function Page() {
                   </div>
                   <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-1">Waste Recovered</p>
                   <p className="text-2xl sm:text-3xl font-bold">5,100<span className="text-base sm:text-lg font-normal text-muted-foreground ml-1">t</span></p>
-                </div>
-              </div>
-            </div>
+                </motion.div>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
         {/* What is SAMVARTANA - Enhanced Visual Section */}
-        <section className="rounded-2xl sm:rounded-3xl bg-gradient-to-br from-card via-card to-accent/5 border border-border shadow-2xl p-6 sm:p-10 lg:p-14 relative overflow-hidden">
+        <motion.section 
+          className="rounded-2xl sm:rounded-3xl bg-gradient-to-br from-card via-card to-accent/5 border border-border shadow-2xl p-6 sm:p-10 lg:p-14 relative overflow-hidden"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(15,118,110,0.05),transparent)]" />
           <div className="relative z-10 max-w-6xl mx-auto">
-            <div className="text-center mb-8 sm:mb-12">
+            <motion.div 
+              className="text-center mb-8 sm:mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               <div className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-primary/10 border border-primary/20 mb-4 sm:mb-6">
                 <Globe className="h-4 w-4 text-primary" />
                 <span className="text-sm font-semibold text-primary">About SAMVARTANA</span>
@@ -150,11 +249,20 @@ export default function Page() {
               <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
                 Sanskrit for <span className="font-semibold text-foreground">"completion of a cycle"</span> — representing the full circular transformation of materials in mining
               </p>
-            </div>
+            </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-10">
+            <motion.div 
+              className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-10"
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true, margin: "-50px" }}
+            >
               <div className="space-y-4 sm:space-y-6">
-                <div className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300">
+                <motion.div 
+                  className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300"
+                  variants={slideInLeft}
+                >
                   <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-gradient-to-br from-primary to-emerald-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
                     <Database className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
                   </div>
@@ -165,9 +273,12 @@ export default function Page() {
                       ensuring comprehensive assessments with incomplete data.
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300">
+                <motion.div 
+                  className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300"
+                  variants={slideInLeft}
+                >
                   <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
                     <Workflow className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
                   </div>
@@ -178,9 +289,12 @@ export default function Page() {
                       and end-of-life for Aluminium, Copper, and Steel.
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300">
+                <motion.div 
+                  className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300"
+                  variants={slideInLeft}
+                >
                   <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-gradient-to-br from-sky-500 to-sky-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
                     <Recycle className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
                   </div>
@@ -191,11 +305,14 @@ export default function Page() {
                       to quantify circular economy performance.
                     </p>
                   </div>
-                </div>
+                </motion.div>
               </div>
 
               <div className="space-y-4 sm:space-y-6">
-                <div className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300">
+                <motion.div 
+                  className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300"
+                  variants={slideInRight}
+                >
                   <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
                     <LineChart className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
                   </div>
@@ -206,9 +323,12 @@ export default function Page() {
                       make complex data accessible to stakeholders.
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300">
+                <motion.div 
+                  className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300"
+                  variants={slideInRight}
+                >
                   <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
                     <Target className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
                   </div>
@@ -219,9 +339,12 @@ export default function Page() {
                       and implementation roadmaps for planning.
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300">
+                <motion.div 
+                  className="group flex gap-4 sm:gap-5 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-accent/30 transition-all duration-300"
+                  variants={slideInRight}
+                >
                   <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
                     <Factory className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
                   </div>
@@ -232,11 +355,17 @@ export default function Page() {
                       tailored to mining industry requirements.
                     </p>
                   </div>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/10 to-emerald-50/50 border-2 border-primary/30 p-6 sm:p-8 text-center shadow-lg">
+            <motion.div 
+              className="rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/10 to-emerald-50/50 border-2 border-primary/30 p-6 sm:p-8 text-center shadow-lg"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
               <p className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 flex flex-col sm:flex-row items-center justify-center gap-2">
                 <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                 Built for India's Ministry of Mines
@@ -245,13 +374,19 @@ export default function Page() {
                 Designed to accelerate India's transition to a circular minerals economy with 
                 transparent, traceable, and actionable environmental intelligence.
               </p>
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Core Features - Problem Statement Alignment */}
         <section>
-          <div className="text-center mb-10 sm:mb-14">
+          <motion.div 
+            className="text-center mb-10 sm:mb-14"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+          >
             <div className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-primary/10 border border-primary/20 mb-4 sm:mb-6">
               <Layers className="h-4 w-4 text-primary" />
               <span className="text-sm font-semibold text-primary">Platform Capabilities</span>
@@ -260,10 +395,19 @@ export default function Page() {
             <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
               End-to-end features covering every aspect of the circular mining economy problem statement
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="group rounded-2xl border-2 border-border bg-card p-7 hover:shadow-2xl hover:border-primary/40 transition-all duration-300 hover:-translate-y-1">
+          <motion.div 
+            className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, margin: "-50px" }}
+          >
+            <motion.div 
+              className="group rounded-2xl border-2 border-border bg-card p-7 hover:shadow-2xl hover:border-primary/40 transition-all duration-300 hover:-translate-y-1"
+              variants={scaleIn}
+            >
               <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-primary to-emerald-700 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg">
                 <FileText className="h-7 w-7 text-white" />
               </div>
@@ -272,9 +416,12 @@ export default function Page() {
                 Stakeholder-ready reports with CO₂, energy, water, waste metrics, and circularity scores 
                 traceable to transparent assumptions.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="group rounded-2xl border-2 border-border bg-card p-7 hover:shadow-2xl hover:border-primary/40 transition-all duration-300 hover:-translate-y-1">
+            <motion.div 
+              className="group rounded-2xl border-2 border-border bg-card p-7 hover:shadow-2xl hover:border-primary/40 transition-all duration-300 hover:-translate-y-1"
+              variants={scaleIn}
+            >
               <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg">
                 <Zap className="h-7 w-7 text-white" />
               </div>
@@ -283,9 +430,12 @@ export default function Page() {
                 Intelligent estimation for missing parameters using metal-specific industry benchmarks 
                 with full transparency on data sources.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="group rounded-2xl border-2 border-border bg-card p-7 hover:shadow-2xl hover:border-primary/40 transition-all duration-300 hover:-translate-y-1">
+            <motion.div 
+              className="group rounded-2xl border-2 border-border bg-card p-7 hover:shadow-2xl hover:border-primary/40 transition-all duration-300 hover:-translate-y-1"
+              variants={scaleIn}
+            >
               <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg">
                 <Workflow className="h-7 w-7 text-white" />
               </div>
@@ -294,9 +444,12 @@ export default function Page() {
                 Interactive Sankey visualizations showing lifecycle stages from extraction to end-of-life 
                 with circular economy loops.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="group rounded-2xl border-2 border-border bg-card p-7 hover:shadow-2xl hover:border-primary/40 transition-all duration-300 hover:-translate-y-1">
+            <motion.div 
+              className="group rounded-2xl border-2 border-border bg-card p-7 hover:shadow-2xl hover:border-primary/40 transition-all duration-300 hover:-translate-y-1"
+              variants={scaleIn}
+            >
               <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg">
                 <BarChart3 className="h-7 w-7 text-white" />
               </div>
@@ -305,9 +458,12 @@ export default function Page() {
                 Compare multiple pathways with feasibility analysis, cost-benefit metrics, 
                 and implementation complexity scores.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="group rounded-2xl border-2 border-border bg-card p-7 hover:shadow-2xl hover:border-primary/40 transition-all duration-300 hover:-translate-y-1">
+            <motion.div 
+              className="group rounded-2xl border-2 border-border bg-card p-7 hover:shadow-2xl hover:border-primary/40 transition-all duration-300 hover:-translate-y-1"
+              variants={scaleIn}
+            >
               <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg">
                 <Globe className="h-7 w-7 text-white" />
               </div>
@@ -316,9 +472,12 @@ export default function Page() {
                 Customize emission factors, energy grids, and processing parameters 
                 for your specific geography and facility.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="group rounded-2xl border-2 border-border bg-card p-7 hover:shadow-2xl hover:border-primary/40 transition-all duration-300 hover:-translate-y-1">
+            <motion.div 
+              className="group rounded-2xl border-2 border-border bg-card p-7 hover:shadow-2xl hover:border-primary/40 transition-all duration-300 hover:-translate-y-1"
+              variants={scaleIn}
+            >
               <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg">
                 <Download className="h-7 w-7 text-white" />
               </div>
@@ -327,21 +486,39 @@ export default function Page() {
                 Download comprehensive reports in multiple formats and integrate with existing 
                 sustainability management systems.
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </section>
 
         {/* CTA Section - Enhanced */}
-        <section className="rounded-2xl sm:rounded-3xl bg-gradient-to-br from-primary via-emerald-700 to-teal-700 text-white p-8 sm:p-12 lg:p-16 shadow-2xl relative overflow-hidden">
+        <motion.section 
+          className="rounded-2xl sm:rounded-3xl bg-gradient-to-br from-primary via-emerald-700 to-teal-700 text-white p-8 sm:p-12 lg:p-16 shadow-2xl relative overflow-hidden"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.15),transparent)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.1),transparent)]" />
-          <div className="relative z-10 text-center max-w-4xl mx-auto">
+          <motion.div 
+            className="relative z-10 text-center max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <h3 className="text-4xl sm:text-5xl font-bold mb-6 leading-tight">Ready to Transform Your Operations?</h3>
             <p className="text-xl opacity-95 mb-10 leading-relaxed">
               Join the circular economy revolution. Start your first Life Cycle Assessment today 
               and discover opportunities for sustainable mineral processing.
             </p>
-            <div className="flex flex-wrap justify-center gap-5">
+            <motion.div 
+              className="flex flex-wrap justify-center gap-5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
               <Button asChild size="lg" variant="secondary" className="shadow-2xl hover:shadow-3xl transition-all text-base h-14 px-10 font-semibold">
                 <Link href="/lca">
                   <BarChart3 className="h-5 w-5 mr-2" />
@@ -355,9 +532,9 @@ export default function Page() {
                   <ArrowRight className="h-5 w-5 ml-2" />
                 </Link>
               </Button>
-            </div>
-          </div>
-        </section>
+            </motion.div>
+          </motion.div>
+        </motion.section>
       </main>
 
       {/* Footer */}
