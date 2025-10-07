@@ -6,7 +6,6 @@ import { Toaster } from "@/components/ui/sonner";
 import Script from "next/script";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Leaf } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "SAMVARTANA - Circular Mining Intelligence Platform",
@@ -35,19 +34,23 @@ export default function RootLayout({
 
         {/* Single Global Header Navigation */}
         <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-card/95 backdrop-blur-md shadow-sm">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 items-center justify-between gap-6">
-              <div className="flex items-center gap-8">
-                <Link href="/" className="flex items-center gap-2.5 group">
-                  <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-primary to-emerald-700 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all">
-                    <Leaf className="h-5 w-5 text-white" />
+          <div className="mx-auto max-w-7xl px-3 sm:px-4 lg:px-8">
+            <div className="flex h-14 sm:h-16 items-center justify-between gap-4 sm:gap-6">
+              <div className="flex items-center gap-4 sm:gap-8">
+                <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group">
+                  <div className="relative h-8 w-8 sm:h-9 sm:w-9 rounded-lg overflow-hidden shadow-lg group-hover:shadow-xl transition-all flex-shrink-0">
+                    <img 
+                      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/samvatana-draft-logo-1759812040224.jpeg"
+                      alt="SAMVARTANA Logo"
+                      className="h-full w-full object-cover"
+                    />
                   </div>
-                  <div className="flex flex-col">
-                    <h1 className="text-lg font-bold tracking-tight">SAMVARTANA</h1>
-                    <p className="text-xs text-muted-foreground">Circular Mining Intelligence</p>
+                  <div className="flex flex-col min-w-0">
+                    <h1 className="text-base sm:text-lg font-bold tracking-tight truncate">SAMVARTANA</h1>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground truncate hidden xs:block">Circular Mining Intelligence</p>
                   </div>
                 </Link>
-                <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+                <nav className="hidden md:flex items-center gap-4 lg:gap-6 text-sm font-medium">
                   <Link href="/" className="text-foreground/70 hover:text-foreground transition-colors">Home</Link>
                   <Link href="/platform" className="text-foreground/70 hover:text-foreground transition-colors">Platform</Link>
                   <Link href="/lca" className="text-foreground/70 hover:text-foreground transition-colors">LCA</Link>
@@ -55,11 +58,11 @@ export default function RootLayout({
                   <Link href="/reports" className="text-foreground/70 hover:text-foreground transition-colors">Reports</Link>
                 </nav>
               </div>
-              <div className="flex items-center gap-3">
-                <Button asChild variant="ghost" size="sm" className="hidden sm:flex">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <Button asChild variant="ghost" size="sm" className="hidden sm:flex h-8 sm:h-9 text-xs sm:text-sm">
                   <Link href="/lca">Start Assessment</Link>
                 </Button>
-                <Button asChild size="sm" className="shadow-md hover:shadow-lg transition-all">
+                <Button asChild size="sm" className="shadow-md hover:shadow-lg transition-all h-8 sm:h-9 text-xs sm:text-sm">
                   <Link href="/platform">Dashboard</Link>
                 </Button>
               </div>

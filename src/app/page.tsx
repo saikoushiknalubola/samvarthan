@@ -367,8 +367,12 @@ export default function Page() {
             {/* Top Row - Logo and Copyright */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-border/40">
               <div className="flex items-center gap-3">
-                <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-primary to-emerald-700 flex items-center justify-center shadow-lg">
-                  <Leaf className="h-5 w-5 text-white" />
+                <div className="relative h-9 w-9 rounded-lg overflow-hidden shadow-lg flex-shrink-0">
+                  <img 
+                    src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/samvatana-draft-logo-1759812040224.jpeg"
+                    alt="SAMVARTANA Logo"
+                    className="h-full w-full object-cover"
+                  />
                 </div>
                 <div>
                   <span className="font-bold text-base">SAMVARTANA</span>
