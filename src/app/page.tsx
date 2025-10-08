@@ -220,6 +220,163 @@ export default function Page() {
                   <p className="text-2xl sm:text-3xl font-bold">5,100<span className="text-base sm:text-lg font-normal text-muted-foreground ml-1">t</span></p>
                 </motion.div>
               </motion.div>
+
+              {/* Enhanced LCA Data - Lifecycle Stage Breakdown */}
+              <motion.div
+                className="mt-6 pt-6 border-t border-border"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.5 }}
+              >
+                <h4 className="text-sm font-semibold mb-4 flex items-center gap-2">
+                  <Layers className="h-4 w-4 text-primary" />
+                  Lifecycle Stage Emissions Breakdown (tCO₂e)
+                </h4>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  <div className="rounded-lg bg-gradient-to-br from-red-50 to-orange-50 border border-red-200 p-3">
+                    <p className="text-xs text-muted-foreground mb-1">Extraction</p>
+                    <p className="text-xl font-bold text-red-700">3,820</p>
+                    <p className="text-xs text-emerald-600 font-medium">-2.1% vs baseline</p>
+                  </div>
+                  <div className="rounded-lg bg-gradient-to-br from-amber-50 to-yellow-50 border border-amber-200 p-3">
+                    <p className="text-xs text-muted-foreground mb-1">Processing</p>
+                    <p className="text-xl font-bold text-amber-700">3,140</p>
+                    <p className="text-xs text-emerald-600 font-medium">-4.8% vs baseline</p>
+                  </div>
+                  <div className="rounded-lg bg-gradient-to-br from-sky-50 to-cyan-50 border border-sky-200 p-3">
+                    <p className="text-xs text-muted-foreground mb-1">Transportation</p>
+                    <p className="text-xl font-bold text-sky-700">1,460</p>
+                    <p className="text-xs text-emerald-600 font-medium">-1.2% vs baseline</p>
+                  </div>
+                  <div className="rounded-lg bg-gradient-to-br from-purple-50 to-pink-50 border border-purple-200 p-3">
+                    <p className="text-xs text-muted-foreground mb-1">End-of-Life</p>
+                    <p className="text-xl font-bold text-purple-700">1,000</p>
+                    <p className="text-xs text-emerald-600 font-medium">-5.1% vs baseline</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Material-Specific Metrics */}
+              <motion.div
+                className="mt-6 pt-6 border-t border-border"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.7 }}
+              >
+                <h4 className="text-sm font-semibold mb-4 flex items-center gap-2">
+                  <Factory className="h-4 w-4 text-primary" />
+                  Material-Specific Performance
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div className="rounded-lg border-2 border-border bg-card p-4 hover:shadow-lg transition-all">
+                    <div className="flex items-center justify-between mb-3">
+                      <h5 className="font-semibold text-sm">Aluminium</h5>
+                      <span className="text-xs px-2 py-1 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200">Active</span>
+                    </div>
+                    <div className="space-y-2 text-xs">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Recycling Rate:</span>
+                        <span className="font-semibold">76%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Virgin Material:</span>
+                        <span className="font-semibold">24%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Energy Saved:</span>
+                        <span className="font-semibold text-emerald-600">+95%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">CO₂ Avoided:</span>
+                        <span className="font-semibold text-emerald-600">8,200 t</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="rounded-lg border-2 border-border bg-card p-4 hover:shadow-lg transition-all">
+                    <div className="flex items-center justify-between mb-3">
+                      <h5 className="font-semibold text-sm">Copper</h5>
+                      <span className="text-xs px-2 py-1 rounded-full bg-sky-100 text-sky-700 border border-sky-200">Active</span>
+                    </div>
+                    <div className="space-y-2 text-xs">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Recycling Rate:</span>
+                        <span className="font-semibold">68%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Virgin Material:</span>
+                        <span className="font-semibold">32%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Energy Saved:</span>
+                        <span className="font-semibold text-emerald-600">+85%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">CO₂ Avoided:</span>
+                        <span className="font-semibold text-emerald-600">6,800 t</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="rounded-lg border-2 border-border bg-card p-4 hover:shadow-lg transition-all">
+                    <div className="flex items-center justify-between mb-3">
+                      <h5 className="font-semibold text-sm">Steel</h5>
+                      <span className="text-xs px-2 py-1 rounded-full bg-amber-100 text-amber-700 border border-amber-200">Active</span>
+                    </div>
+                    <div className="space-y-2 text-xs">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Recycling Rate:</span>
+                        <span className="font-semibold">85%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Virgin Material:</span>
+                        <span className="font-semibold">15%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Energy Saved:</span>
+                        <span className="font-semibold text-emerald-600">+74%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">CO₂ Avoided:</span>
+                        <span className="font-semibold text-emerald-600">12,400 t</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Circular Economy Performance */}
+              <motion.div
+                className="mt-6 pt-6 border-t border-border"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.9 }}
+              >
+                <h4 className="text-sm font-semibold mb-4 flex items-center gap-2">
+                  <Recycle className="h-4 w-4 text-primary" />
+                  Circular Economy Index (MCI)
+                </h4>
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                  <div className="text-center p-3 rounded-lg bg-gradient-to-br from-emerald-50 to-teal-50 border-2 border-emerald-200">
+                    <p className="text-2xl font-bold text-emerald-700">0.78</p>
+                    <p className="text-xs text-muted-foreground mt-1">Overall MCI</p>
+                  </div>
+                  <div className="text-center p-3 rounded-lg bg-card border border-border">
+                    <p className="text-xl font-bold">82%</p>
+                    <p className="text-xs text-muted-foreground mt-1">Material Recovery</p>
+                  </div>
+                  <div className="text-center p-3 rounded-lg bg-card border border-border">
+                    <p className="text-xl font-bold">91%</p>
+                    <p className="text-xs text-muted-foreground mt-1">Resource Efficiency</p>
+                  </div>
+                  <div className="text-center p-3 rounded-lg bg-card border border-border">
+                    <p className="text-xl font-bold">74%</p>
+                    <p className="text-xs text-muted-foreground mt-1">Waste Reduction</p>
+                  </div>
+                  <div className="text-center p-3 rounded-lg bg-card border border-border">
+                    <p className="text-xl font-bold">88%</p>
+                    <p className="text-xs text-muted-foreground mt-1">Circular Loops</p>
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </section>
@@ -490,6 +647,146 @@ export default function Page() {
           </motion.div>
         </section>
 
+        {/* NEW: Regional & Industry Benchmarks Section */}
+        <motion.section
+          className="rounded-2xl sm:rounded-3xl bg-gradient-to-br from-card to-accent/10 border border-border shadow-2xl p-6 sm:p-10"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <motion.div 
+            className="text-center mb-8 sm:mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-primary/10 border border-primary/20 mb-4 sm:mb-6">
+              <Globe className="h-4 w-4 text-primary" />
+              <span className="text-sm font-semibold text-primary">Industry Benchmarks</span>
+            </div>
+            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Performance Against Global Standards</h3>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Compare your operations with regional and global mining industry benchmarks
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <motion.div
+              className="rounded-xl bg-card border-2 border-border p-6"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <h4 className="font-bold text-lg mb-4 flex items-center gap-2">
+                <Target className="h-5 w-5 text-primary" />
+                India Mining Sector Performance
+              </h4>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-sm text-muted-foreground">CO₂ Intensity (kg/tonne)</span>
+                    <span className="text-sm font-semibold">420 vs 480 (avg)</span>
+                  </div>
+                  <div className="h-2 bg-muted rounded-full overflow-hidden">
+                    <div className="h-full w-[87%] bg-gradient-to-r from-emerald-500 to-emerald-600" />
+                  </div>
+                  <p className="text-xs text-emerald-600 font-medium mt-1">12.5% better than average</p>
+                </div>
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-sm text-muted-foreground">Energy Efficiency (MJ/kg)</span>
+                    <span className="text-sm font-semibold">18.2 vs 22.4 (avg)</span>
+                  </div>
+                  <div className="h-2 bg-muted rounded-full overflow-hidden">
+                    <div className="h-full w-[81%] bg-gradient-to-r from-sky-500 to-sky-600" />
+                  </div>
+                  <p className="text-xs text-emerald-600 font-medium mt-1">18.8% better than average</p>
+                </div>
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-sm text-muted-foreground">Water Usage (m³/tonne)</span>
+                    <span className="text-sm font-semibold">1.8 vs 2.3 (avg)</span>
+                  </div>
+                  <div className="h-2 bg-muted rounded-full overflow-hidden">
+                    <div className="h-full w-[78%] bg-gradient-to-r from-cyan-500 to-cyan-600" />
+                  </div>
+                  <p className="text-xs text-emerald-600 font-medium mt-1">21.7% better than average</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="rounded-xl bg-card border-2 border-border p-6"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <h4 className="font-bold text-lg mb-4 flex items-center gap-2">
+                <BarChart3 className="h-5 w-5 text-primary" />
+                Global Industry Leaders
+              </h4>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between p-3 rounded-lg bg-emerald-50 border border-emerald-200">
+                  <div className="flex items-center gap-3">
+                    <div className="h-8 w-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold">1</div>
+                    <div>
+                      <p className="font-semibold text-sm">Norway</p>
+                      <p className="text-xs text-muted-foreground">Best Practice</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-bold text-emerald-700">340</p>
+                    <p className="text-xs text-muted-foreground">kg CO₂/t</p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between p-3 rounded-lg bg-sky-50 border border-sky-200">
+                  <div className="flex items-center gap-3">
+                    <div className="h-8 w-8 rounded-full bg-sky-600 text-white flex items-center justify-center text-xs font-bold">2</div>
+                    <div>
+                      <p className="font-semibold text-sm">Canada</p>
+                      <p className="text-xs text-muted-foreground">Leading Practice</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-bold text-sky-700">380</p>
+                    <p className="text-xs text-muted-foreground">kg CO₂/t</p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between p-3 rounded-lg bg-primary/10 border border-primary/30">
+                  <div className="flex items-center gap-3">
+                    <div className="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">3</div>
+                    <div>
+                      <p className="font-semibold text-sm">Your Operation</p>
+                      <p className="text-xs text-muted-foreground">Top Performer</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-bold text-primary">420</p>
+                    <p className="text-xs text-muted-foreground">kg CO₂/t</p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between p-3 rounded-lg bg-muted/50 border border-border">
+                  <div className="flex items-center gap-3">
+                    <div className="h-8 w-8 rounded-full bg-muted-foreground text-white flex items-center justify-center text-xs font-bold">-</div>
+                    <div>
+                      <p className="font-semibold text-sm">Industry Average</p>
+                      <p className="text-xs text-muted-foreground">Global Baseline</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-bold text-muted-foreground">480</p>
+                    <p className="text-xs text-muted-foreground">kg CO₂/t</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </motion.section>
+
         {/* CTA Section - Enhanced */}
         <motion.section 
           className="rounded-2xl sm:rounded-3xl bg-gradient-to-br from-primary via-emerald-700 to-teal-700 text-white p-8 sm:p-12 lg:p-16 shadow-2xl relative overflow-hidden"
@@ -537,20 +834,55 @@ export default function Page() {
         </motion.section>
       </main>
 
-      {/* Footer */}
+      {/* Footer with Animated Logo */}
       <footer className="border-t border-border/40 bg-card/50 backdrop-blur-sm mt-16 sm:mt-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
           <div className="flex flex-col gap-6">
             {/* Top Row - Logo and Copyright */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-border/40">
               <div className="flex items-center gap-3">
-                <div className="relative h-12 w-12 rounded-full overflow-hidden shadow-xl flex-shrink-0 ring-2 ring-primary/20 bg-primary">
+                <motion.div 
+                  className="relative h-12 w-12 rounded-full overflow-hidden shadow-xl flex-shrink-0 ring-2 ring-primary/20 bg-primary"
+                  animate={{ 
+                    rotate: [0, 360],
+                    scale: [1, 1.05, 1]
+                  }}
+                  transition={{ 
+                    rotate: {
+                      duration: 20,
+                      repeat: Infinity,
+                      ease: "linear"
+                    },
+                    scale: {
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }
+                  }}
+                  whileHover={{ 
+                    scale: 1.1,
+                    rotate: 360,
+                    transition: { duration: 0.8, ease: "easeOut" }
+                  }}
+                >
+                  <motion.div
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-emerald-500 to-teal-500 opacity-50 blur-xl"
+                    animate={{ 
+                      opacity: [0.3, 0.6, 0.3],
+                      scale: [1, 1.2, 1]
+                    }}
+                    transition={{ 
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
                   <img 
                     src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/samvatana-draft-logo-1759812040224.jpeg"
                     alt="SAMVARTANA Logo"
-                    className="h-full w-full object-cover scale-150"
+                    className="h-full w-full object-cover scale-150 relative z-10"
                   />
-                </div>
+                </motion.div>
                 <div>
                   <span className="font-bold text-lg">SAMVARTANA</span>
                   <p className="text-xs text-primary font-semibold">Circular Mining Intelligence</p>

@@ -1,3 +1,5 @@
+"use client";
+
 import type { Metadata } from "next";
 import "./globals.css";
 import VisualEditsMessenger from "../visual-edits/VisualEditsMessenger";
@@ -6,11 +8,7 @@ import { Toaster } from "@/components/ui/sonner";
 import Script from "next/script";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-
-export const metadata: Metadata = {
-  title: "SAMVARTANA - Circular Mining Intelligence Platform",
-  description: "AI-assisted LCA and circular mining intelligence",
-};
+import { motion } from "framer-motion";
 
 export default function RootLayout({
   children,
@@ -19,6 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <title>SAMVARTANA - Circular Mining Intelligence Platform</title>
+        <meta name="description" content="AI-assisted LCA and circular mining intelligence" />
+      </head>
       <body className="antialiased">
         <ErrorReporter />
         <Script
@@ -38,13 +40,48 @@ export default function RootLayout({
             <div className="flex h-16 sm:h-18 items-center justify-between gap-4 sm:gap-6">
               <div className="flex items-center gap-4 sm:gap-8">
                 <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group">
-                  <div className="relative h-12 w-12 sm:h-14 sm:w-14 rounded-full overflow-hidden shadow-xl group-hover:shadow-2xl transition-all flex-shrink-0 ring-2 ring-primary/20 group-hover:ring-primary/40 bg-primary">
+                  <motion.div 
+                    className="relative h-12 w-12 sm:h-14 sm:w-14 rounded-full overflow-hidden shadow-xl group-hover:shadow-2xl transition-shadow flex-shrink-0 ring-2 ring-primary/20 group-hover:ring-primary/40 bg-primary"
+                    animate={{ 
+                      rotate: [0, 360],
+                      scale: [1, 1.05, 1]
+                    }}
+                    transition={{ 
+                      rotate: {
+                        duration: 20,
+                        repeat: Infinity,
+                        ease: "linear"
+                      },
+                      scale: {
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }
+                    }}
+                    whileHover={{ 
+                      scale: 1.1,
+                      rotate: 360,
+                      transition: { duration: 0.8, ease: "easeOut" }
+                    }}
+                  >
+                    <motion.div
+                      className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-emerald-500 to-teal-500 opacity-50 blur-xl"
+                      animate={{ 
+                        opacity: [0.3, 0.6, 0.3],
+                        scale: [1, 1.2, 1]
+                      }}
+                      transition={{ 
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
                     <img 
                       src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/samvatana-draft-logo-1759812040224.jpeg"
                       alt="SAMVARTANA Logo"
-                      className="h-full w-full object-cover scale-150"
+                      className="h-full w-full object-cover scale-150 relative z-10"
                     />
-                  </div>
+                  </motion.div>
                   <div className="flex flex-col min-w-0">
                     <h1 className="text-lg sm:text-xl font-bold tracking-tight truncate">SAMVARTANA</h1>
                     <p className="text-xs sm:text-sm text-primary font-semibold truncate">Circular Mining Intelligence</p>
