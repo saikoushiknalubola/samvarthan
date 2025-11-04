@@ -8,6 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import RealTimeMetrics from "@/components/RealTimeMetrics";
+import LiveActivityFeed from "@/components/LiveActivityFeed";
+import CircularityScoreCard from "@/components/CircularityScoreCard";
 import { 
   Factory, 
   Globe, 
@@ -33,7 +36,8 @@ import {
   Gauge,
   Building2,
   Pickaxe,
-  Package
+  Package,
+  Sparkles
 } from "lucide-react";
 
 // Dynamic imports with loading states
@@ -69,30 +73,6 @@ const fadeInUp = {
   transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] }
 };
 
-const fadeIn = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: { duration: 0.8, ease: "easeOut" }
-};
-
-const scaleIn = {
-  initial: { opacity: 0, scale: 0.9 },
-  animate: { opacity: 1, scale: 1 },
-  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
-};
-
-const slideInLeft = {
-  initial: { opacity: 0, x: -30 },
-  animate: { opacity: 1, x: 0 },
-  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] }
-};
-
-const slideInRight = {
-  initial: { opacity: 0, x: 30 },
-  animate: { opacity: 1, x: 0 },
-  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] }
-};
-
 const staggerContainer = {
   animate: {
     transition: {
@@ -123,8 +103,13 @@ export default function Page() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             >
-              <h1 className="text-xl sm:text-2xl font-bold tracking-tight">Platform Dashboard</h1>
-              <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 sm:mt-1">Comprehensive lifecycle assessment and circularity analytics</p>
+              <div className="flex items-center gap-2">
+                <h1 className="text-xl sm:text-2xl font-bold tracking-tight">Platform Dashboard</h1>
+                <Sparkles className="h-5 w-5 text-primary animate-pulse" />
+              </div>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 sm:mt-1">
+                Real-time lifecycle assessment and circularity analytics powered by AI
+              </p>
             </motion.div>
             <motion.div 
               className="flex flex-col sm:flex-row gap-2 w-full"
@@ -169,7 +154,7 @@ export default function Page() {
 
       {/* Main Content - Mobile-First Perfect Spacing */}
       <main className="mx-auto max-w-screen-2xl px-3 sm:px-4 lg:px-6 py-4 sm:py-6 space-y-6 sm:space-y-8">
-        {/* Enhanced LCA Data Visualization Section */}
+        {/* ENHANCED: Real-Time Intelligence Hub */}
         <motion.section
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -183,8 +168,8 @@ export default function Page() {
               transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4 sm:mb-5"
             >
-              <Globe className="h-4 w-4 text-primary" />
-              <span className="text-sm font-semibold text-primary">Circular Mining Intelligence</span>
+              <Activity className="h-4 w-4 text-primary animate-pulse" />
+              <span className="text-sm font-semibold text-primary">Live Intelligence Dashboard</span>
             </motion.div>
             <motion.h2 
               className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4"
@@ -200,17 +185,31 @@ export default function Page() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
-              Data-driven insights for Aluminium, Copper, and Steel production with complete lifecycle transparency 
+              AI-powered insights for Aluminium, Copper, and Steel production with complete lifecycle transparency 
               from extraction through end-of-life recovery.
             </motion.p>
           </div>
 
-          {/* NEW: Material Flow Visualization */}
+          {/* Real-Time Metrics Integration */}
+          <RealTimeMetrics timeRange="30d" />
+
+          {/* NEW: Side-by-side Activity & Circularity */}
           <motion.div 
-            className="mb-6 sm:mb-8"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <LiveActivityFeed />
+            <CircularityScoreCard assessmentId={1} />
+          </motion.div>
+
+          {/* Material Flow Analysis */}
+          <motion.div 
+            className="mt-6 sm:mt-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, delay: 1.0, ease: [0.22, 1, 0.36, 1] }}
           >
             <h3 className="text-base sm:text-lg font-bold mb-4 flex items-center gap-2">
               <Layers className="h-5 w-5 text-primary" />
@@ -377,12 +376,12 @@ export default function Page() {
             </div>
           </motion.div>
 
-          {/* NEW: Environmental Impact Breakdown by Material */}
+          {/* Environmental Impact Breakdown by Material */}
           <motion.div 
-            className="mb-6 sm:mb-8"
+            className="mt-6 sm:mt-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.0, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
           >
             <h3 className="text-base sm:text-lg font-bold mb-4 flex items-center gap-2">
               <BarChart3 className="h-5 w-5 text-primary" />
@@ -538,9 +537,9 @@ export default function Page() {
             </div>
           </motion.div>
 
-          {/* NEW: Water & Energy Management Dashboard */}
+          {/* Water & Energy Management Dashboard */}
           <motion.div 
-            className="mb-6 sm:mb-8"
+            className="mt-6 sm:mt-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
@@ -638,12 +637,12 @@ export default function Page() {
             </div>
           </motion.div>
 
-          {/* NEW: Waste Stream Analysis */}
+          {/* Waste Stream Analysis */}
           <motion.div 
-            className="mb-6 sm:mb-8"
+            className="mt-6 sm:mt-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.4, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, delay: 1.3, ease: [0.22, 1, 0.36, 1] }}
           >
             <h3 className="text-base sm:text-lg font-bold mb-4 flex items-center gap-2">
               <Trash2 className="h-5 w-5 text-primary" />
@@ -702,11 +701,12 @@ export default function Page() {
             </div>
           </motion.div>
 
-          {/* NEW: Regional Performance Comparison */}
+          {/* Regional Performance Comparison */}
           <motion.div 
+            className="mt-6 sm:mt-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.6, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, delay: 1.4, ease: [0.22, 1, 0.36, 1] }}
           >
             <h3 className="text-base sm:text-lg font-bold mb-4 flex items-center gap-2">
               <Globe className="h-5 w-5 text-primary" />
@@ -787,7 +787,7 @@ export default function Page() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.8, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.8, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
         >
           <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4 sm:space-y-6">
             {/* Perfect Mobile TabsList */}

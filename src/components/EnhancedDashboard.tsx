@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import AdvancedVisualizations from "@/components/AdvancedVisualizations";
+import AIInsightsPanel from "@/components/AIInsightsPanel";
 import {
   TrendingDown,
   TrendingUp,
@@ -21,6 +22,8 @@ import {
   Target,
   BarChart3,
   ChevronDown,
+  Brain,
+  Sparkles
 } from "lucide-react";
 
 type Project = {
@@ -68,6 +71,7 @@ export default function EnhancedDashboard() {
   const [loading, setLoading] = useState(true);
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [showAIInsights, setShowAIInsights] = useState(false);
 
   // Fetch projects on mount
   useEffect(() => {
@@ -393,6 +397,40 @@ export default function EnhancedDashboard() {
       {selectedProject && (
         <AdvancedVisualizations projectId={selectedProject.id} />
       )}
+
+      {/* AI Insights Toggle */}
+      {selectedProject && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="flex justify-center"
+        >
+          <Button
+            onClick={() => setShowAIInsights(!showAIInsights)}
+            className="gap-2 shadow-lg hover:shadow-xl transition-all"
+            size="lg"
+          >
+            <Brain className="h-5 w-5" />
+            {showAIInsights ? 'Hide' : 'Show'} AI Insights
+            <Sparkles className="h-4 w-4 animate-pulse" />
+          </Button>
+        </motion.div>
+      )}
+
+      {/* AI Insights Panel */}
+      <AnimatePresence mode="wait">
+        {showAIInsights && selectedProject && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <AIInsightsPanel assessmentId={selectedProject.id} />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Benchmark Comparison - Mobile Perfect */}
       {currentImpact?.benchmarkComparison && (

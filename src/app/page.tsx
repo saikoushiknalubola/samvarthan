@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import RealTimeMetrics from "@/components/RealTimeMetrics";
 import { 
   ArrowRight, 
   BarChart3, 
@@ -22,7 +23,8 @@ import {
   Factory,
   Workflow,
   TrendingUp,
-  Download
+  Download,
+  Sparkles
 } from "lucide-react";
 
 // Animation variants
@@ -77,8 +79,8 @@ export default function Page() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              <Globe className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Professional LCA Platform for Mining Industry</span>
+              <Sparkles className="h-4 w-4 text-primary animate-pulse" />
+              <span className="text-sm font-medium text-primary">AI-Powered LCA Platform for Mining Industry</span>
             </motion.div>
             
             <motion.h2 
@@ -105,7 +107,7 @@ export default function Page() {
               transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
             >
               Comprehensive Life Cycle Assessment and circular mining intelligence. 
-              Accelerate sustainable mineral processing with data-driven insights.
+              Accelerate sustainable mineral processing with real-time, AI-driven insights.
             </motion.p>
             
             <motion.div 
@@ -140,8 +142,17 @@ export default function Page() {
               </Button>
             </motion.div>
 
-            {/* Live Metrics Dashboard */}
-            <motion.div 
+            {/* ENHANCED: Real-Time Live Metrics Dashboard */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1, ease: "easeOut" }}
+            >
+              <RealTimeMetrics timeRange="30d" className="mb-8" />
+            </motion.div>
+
+            {/* Enhanced LCA Data - Lifecycle Stage Breakdown */}
+            <motion.div
               className="rounded-2xl sm:rounded-3xl bg-gradient-to-br from-card to-accent/10 border border-border shadow-2xl p-6 sm:p-8"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
