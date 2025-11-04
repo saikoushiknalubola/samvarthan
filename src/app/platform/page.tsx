@@ -5,6 +5,8 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -37,7 +39,8 @@ import {
   Building2,
   Pickaxe,
   Package,
-  Sparkles
+  Sparkles,
+  Brain
 } from "lucide-react";
 
 // Dynamic imports with loading states
@@ -190,18 +193,66 @@ export default function Page() {
             </motion.p>
           </div>
 
+          {/* NEW: AI-Powered Predictions Dashboard */}
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
+            <Card className="border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-emerald-100/50 hover:shadow-xl transition-all">
+              <CardContent className="p-4 sm:p-6 text-center">
+                <Brain className="h-8 w-8 text-emerald-600 mx-auto mb-3" />
+                <p className="text-xs text-muted-foreground mb-1">AI-Predicted CO₂ Reduction</p>
+                <p className="text-2xl sm:text-3xl font-bold text-emerald-700">
+                  0<span className="text-sm font-normal ml-1">tCO₂e</span>
+                </p>
+                <Badge className="mt-2 bg-emerald-600">This Month</Badge>
+              </CardContent>
+            </Card>
+            <Card className="border-2 border-amber-200 bg-gradient-to-br from-amber-50 to-amber-100/50 hover:shadow-xl transition-all">
+              <CardContent className="p-4 sm:p-6 text-center">
+                <Zap className="h-8 w-8 text-amber-600 mx-auto mb-3" />
+                <p className="text-xs text-muted-foreground mb-1">Energy Savings Potential</p>
+                <p className="text-2xl sm:text-3xl font-bold text-amber-700">
+                  0.0<span className="text-sm font-normal ml-1">MWh</span>
+                </p>
+                <Badge className="mt-2 bg-amber-600">AI Insights</Badge>
+              </CardContent>
+            </Card>
+            <Card className="border-2 border-primary/20 bg-gradient-to-br from-primary/10 to-primary/5 hover:shadow-xl transition-all">
+              <CardContent className="p-4 sm:p-6 text-center">
+                <TrendingUp className="h-8 w-8 text-primary mx-auto mb-3" />
+                <p className="text-xs text-muted-foreground mb-1">Cost Savings Estimate</p>
+                <p className="text-2xl sm:text-3xl font-bold text-primary">
+                  ₹0k<span className="text-sm font-normal ml-1">INR</span>
+                </p>
+                <Badge className="mt-2 bg-primary text-white">Projected</Badge>
+              </CardContent>
+            </Card>
+          </motion.div>
+
           {/* Real-Time Metrics Integration */}
           <RealTimeMetrics timeRange="30d" />
 
-          {/* NEW: Side-by-side Activity & Circularity */}
+          {/* Live Operations Dashboard */}
           <motion.div 
-            className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-6"
+            className="mt-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
+            <div className="mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4">
+                <Activity className="h-4 w-4 text-primary animate-pulse" />
+                <span className="text-sm font-semibold text-primary">Real-Time Platform Activity</span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-bold mb-3">Live Operations Dashboard</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                Monitor ongoing LCA assessments and circular economy projects in real-time
+              </p>
+            </div>
             <LiveActivityFeed />
-            <CircularityScoreCard assessmentId={1} />
           </motion.div>
 
           {/* Material Flow Analysis */}
