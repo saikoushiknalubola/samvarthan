@@ -3,12 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { toast } from "sonner";
 import { motion } from "framer-motion";
-import RealTimeMetrics from "@/components/RealTimeMetrics";
-import LiveActivityFeed from "@/components/LiveActivityFeed";
 import { 
   ArrowRight, 
   BarChart3, 
@@ -28,13 +23,7 @@ import {
   TrendingUp,
   Download,
   Sparkles,
-  Brain,
-  Activity,
-  CheckCircle2,
-  Clock,
-  Users,
-  Award,
-  Lightbulb
+  Users
 } from "lucide-react";
 
 // Animation variants
@@ -42,18 +31,6 @@ const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.6, ease: "easeOut" }
-};
-
-const fadeIn = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: { duration: 0.6 }
-};
-
-const scaleIn = {
-  initial: { opacity: 0, scale: 0.95 },
-  animate: { opacity: 1, scale: 1 },
-  transition: { duration: 0.5, ease: "easeOut" }
 };
 
 const staggerContainer = {
@@ -77,18 +54,6 @@ const slideInRight = {
 };
 
 export default function Page() {
-  const [totalProjects, setTotalProjects] = useState(0);
-
-  useEffect(() => {
-    // Fetch real-time stats for hero section
-    fetch('/api/dashboard/stats?time_range=30d')
-      .then(res => res.json())
-      .then(data => {
-        setTotalProjects(data.totalProjects || 0);
-      })
-      .catch(console.error);
-  }, []);
-
   return (
     <div className="min-h-dvh w-full">
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-20 sm:space-y-24">
@@ -142,7 +107,6 @@ export default function Page() {
                 asChild 
                 size="lg" 
                 className="shadow-lg hover:shadow-xl transition-all gap-2 text-base h-12 px-8 w-full sm:w-auto"
-                onClick={() => toast.success("Starting LCA Assessment...")}
               >
                 <Link href="/lca">
                   <BarChart3 className="h-5 w-5" />
@@ -154,7 +118,6 @@ export default function Page() {
                 size="lg" 
                 variant="outline" 
                 className="shadow-md hover:shadow-lg transition-all gap-2 text-base border-2 h-12 px-8 w-full sm:w-auto"
-                onClick={() => toast.success("Opening Platform Dashboard...")}
               >
                 <Link href="/platform">
                   <BarChart3 className="h-5 w-5" />
@@ -165,26 +128,6 @@ export default function Page() {
             </motion.div>
           </div>
         </section>
-
-        {/* NEW: Live Activity Feed Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4">
-              <Activity className="h-4 w-4 text-primary animate-pulse" />
-              <span className="text-sm font-semibold text-primary">Real-Time Platform Activity</span>
-            </div>
-            <h3 className="text-3xl sm:text-4xl font-bold mb-3">Live Operations Dashboard</h3>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Monitor ongoing LCA assessments and circular economy projects in real-time
-            </p>
-          </div>
-          <LiveActivityFeed />
-        </motion.section>
 
         {/* What is SAMVARTANA - Enhanced Visual Section */}
         <motion.section 
@@ -639,7 +582,7 @@ export default function Page() {
         </motion.section>
       </main>
 
-      {/* Footer with Animated Logo */}
+      {/* Footer with Animated Logo and Premium Developer Credits */}
       <footer className="border-t border-border/40 bg-card/50 backdrop-blur-sm mt-16 sm:mt-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
           <div className="flex flex-col gap-6">
@@ -698,8 +641,8 @@ export default function Page() {
               </p>
             </div>
             
-            {/* Bottom Row - Team Chakra */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            {/* Middle Row - Team Chakra */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pb-6 border-b border-border/40">
               <p className="text-sm font-semibold text-foreground">Developed by Team Chakra</p>
               <div className="flex items-center gap-3">
                 <img 
@@ -713,6 +656,53 @@ export default function Page() {
                 </div>
               </div>
             </div>
+
+            {/* Bottom Row - Premium Developer Credits */}
+            <motion.div 
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 rounded-2xl bg-gradient-to-br from-primary/5 via-emerald-50/50 to-teal-50/50 border-2 border-primary/20 p-6 shadow-lg"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="flex items-center gap-3">
+                <motion.div 
+                  className="h-14 w-14 rounded-full bg-gradient-to-br from-primary to-emerald-600 flex items-center justify-center shadow-lg ring-2 ring-primary/30"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Users className="h-7 w-7 text-white" />
+                </motion.div>
+                <div className="text-left">
+                  <p className="text-sm font-semibold text-muted-foreground">Developed by</p>
+                  <p className="text-lg font-bold text-primary">Saikoushik Nalubola</p>
+                </div>
+              </div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  asChild
+                  variant="default"
+                  size="default"
+                  className="shadow-lg hover:shadow-xl transition-all gap-2 bg-[#0A66C2] hover:bg-[#004182] text-white border-none h-11 px-6"
+                >
+                  <a 
+                    href="https://www.linkedin.com/in/saikoushik-nalubola-081a551a8/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2"
+                  >
+                    <svg 
+                      className="h-5 w-5 fill-current" 
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    Connect on LinkedIn
+                  </a>
+                </Button>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </footer>
